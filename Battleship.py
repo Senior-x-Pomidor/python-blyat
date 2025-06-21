@@ -94,9 +94,12 @@ def check_for_destruction():
             continue
 
         # Prüfe, ob alle Koordinaten getroffen wurden
-        t = f"\033[1;31mx\033[0m"
+
+        t = f"\033[1;31m{"T"}\033[0m"
+        
         all_hit = all(
-            field_show[i][j][0] == t
+            field_show[i][j][0] == t 
+            
             for (i, j) in ship['coords']
         )
 
