@@ -1,14 +1,17 @@
+wasser = f"\033[1;34m~\033[0m"
+
+
 field_show = [
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]],
-    [["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"],["~"]] 
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
+    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]] 
 ]
 
 field_place = [
@@ -91,17 +94,20 @@ def check_for_destruction():
             continue
 
         # Prüfe, ob alle Koordinaten getroffen wurden
+        t = f"\033[1;31mx\033[0m"
         all_hit = all(
-            field_show[i][j][0] == 'T'
+            field_show[i][j][0] == t
             for (i, j) in ship['coords']
         )
 
         # Wenn vollständig getroffen, markiere als zerstört und ersetze Marker
+        
         if all_hit:
             ship['destroyed'] = True
             print(f"Schiff der Länge {ship['length']} wurde zerstört!")
             for (i, j) in ship['coords']:
-                field_show[i][j] = ['X']
+                x = f"\033[1;32mX\033[0m"
+                field_show[i][j] = [x]
 
 def check_for_hit():
 
@@ -110,10 +116,12 @@ def check_for_hit():
     i = i_cord_pick()
     if field_place[i][j]:
         print("Treffer!")
-        field_show[i][j] = ["T"]
+        t = f"\033[1;31mx\033[0m"
+        field_show[i][j] = [t]
     else:
         print("Daneben!")
-        field_show[i][j] = ["o"]
+        o = f"\033[1;36mo\033[0m"
+        field_show[i][j] = [o]
 
 def place_ship():
 
@@ -192,6 +200,7 @@ def lets_sink_ships():
         check_for_destruction()
         if all(ship['destroyed'] for ship in ships_location):
             print("Alle Schiffe sind versenkt! Spiel beendet.")
+            field_show_out()
             break
         i = i+1
 
@@ -200,7 +209,3 @@ def lets_sink_ships():
 
 placement_part()
 lets_sink_ships()
-
-      
-    
-    
