@@ -1,5 +1,10 @@
-wasser = f"\033[1;34m~\033[0m"
+last_update = "22.06.2025"
 
+def clear_terminal():
+    # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
+    print("\033[H\033[J", end="")
+
+wasser = f"\033[1;34m~\033[0m"
 
 field_show = [
     [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
@@ -30,6 +35,9 @@ field_place = [
 letter_list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 ships_to_place = [[4], [3], [2], [1]]
 ships_location =[]
+
+def farbig(text, farbcode):
+    return f"\033[{farbcode}m{text}\033[0m"
 
 def field_show_out():
     print(" ")
@@ -184,20 +192,23 @@ def place_ship():
 
 def placement_part():
     while not all(elem[0] == 0 for elem in ships_to_place):
+        big_text("legacy")
         field_place_out()
         place_ship()
+        clear_terminal()
     field_place_out()
-            
+      
 def lets_sink_ships():
-    i = 1
-    for y in range(75):
-        print(".")
-    while True:
-        print(f"Runde Nr.", i)
 
+    i = 1
+    while True:
+
+        big_text("legacy")
+        print(f"Runde Nr.", i)
         field_show_out()
         check_for_hit()
         check_for_destruction()
+        clear_terminal()
         if all(ship['destroyed'] for ship in ships_location):
             print("Alle Schiffe sind versenkt! Spiel beendet.")
             field_show_out()
@@ -207,5 +218,72 @@ def lets_sink_ships():
 
 
 
-placement_part()
-lets_sink_ships()
+
+
+#Game start and modes
+
+def big_text(text):
+
+
+    if text == "schiffe_versenken":
+
+        print("\033[1;31m   _____      __    _ ________       _    __                          __            \033[0m")
+        print("\033[1;31m  / ___/_____/ /_  (_) __/ __/__    | |  / /__  _____________  ____  / /_____  ____ \033[0m")
+        print("\033[1;33m  \__ \/ ___/ __ \/ / /_/ /_/ _ \   | | / / _ \/ ___/ ___/ _ \/ __ \/ //_/ _ \/ __ \\""\033[0m")
+        print("\033[1;32m ___/ / /__/ / / / / __/ __/  __/   | |/ /  __/ /  (__  )  __/ / / / ,< /  __/ / / /\033[0m")
+        print("\033[1;34m/____/\___/_/ /_/_/_/ /_/  \___/____|___/\___/_/  /____/\___/_/ /_/_/|_|\___/_/ /_/ \033[0m")
+        print("\033[1;34m                              /_____/                                               \033[0m")
+        print("                                               by dani (Senior-x-Pomidor) "+last_update)
+        print(" \n \n \n \n \n")
+
+    elif text == "legacy":
+        print("\033[1;31m      __                                    \033[0m")
+        print("\033[1;31m     / /   ___   ____ _ ____ _ _____ __  __ \033[0m")
+        print("\033[1;31m    / /   / _ \ / __ `// __ `// ___// / / / \033[0m")
+        print("\033[1;31m   / /___/  __// /_/ // /_/ // /__ / /_/ /  \033[0m")
+        print("\033[1;31m  /_____/\___/ \__, / \__,_/ \___/ \__, /   \033[0m")
+        print("\033[1;31m              /____/              /____/    \033[0m")
+
+def legacy():
+
+    placement_part()
+    clear_terminal()
+    lets_sink_ships()
+
+def game_pick_mode():
+
+    big_text("schiffe_versenken")
+
+    print("Bitte Spielmodus auswählen:\n ")
+    print(farbig("1. Legacy  ", 32) + " 2 Spieler, 2 Geräte\n---Spieler plazieren zunächst Schiffe beim Gegener, danach beginnt das Spiel!\n")
+    print(farbig("2. Normal  ", 32) + " 2 Spieler, 1 Gerät \n---Spieler plazieren abwächselnd Schiffe, danach beginnt das Spiel!                (noch nicht verfügbar)\n")
+    print(farbig("3. Computer", 32) + " 1 Spieler, 1 Gerät \n---Spieler plaziert Schiffe, danach beginnt das Spiel!                             (noch nicht verfügbar)\n")
+    print(farbig("4. Exit    ", 31) + " \n---Spiel schließen\n")
+
+    mode = 0
+
+    while mode != 1 and mode != 2 and mode != 3 and mode != 4:
+
+        mode = int(input("Zahl eingeben (1-4):"))
+        
+        if mode != 1 and mode != 2 and mode != 3 and mode != 4:
+
+            print("Ungültige Eingabe!")
+            
+    if mode == 1:
+        clear_terminal()
+        legacy()
+    
+
+
+    if mode == 4:
+        clear_terminal()
+        return print(farbig("\n" +"Exit    ", 31) + "\n")
+
+game_pick_mode()
+
+
+
+
+
+
