@@ -355,7 +355,7 @@ def guess_word():
     big_text("hangman")
     # Nach Spielende das finale Bild anzeigen
     pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
-    print(hangman_pictures[pic_index])
+    print(hangman_pictures[pic_index]+"\n")
     if "_" not in show:
         print("Glückwunsch! Das Wort war:", "".join(letter_ls))
     else:
