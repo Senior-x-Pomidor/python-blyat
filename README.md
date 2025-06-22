@@ -1,3 +1,17 @@
-Battleship is a 2012 American military science fiction action film based on the board game of the same name by Hasbro. 
-The film was directed by Peter Berg from a script by brothers Jon and Erich Hoeber and stars Taylor Kitsch, Alexander Skarsgård, Brooklyn Decker, Rihanna in her feature film debut, Tadanobu Asano, Hamish Linklater and Liam Neeson. 
-Filming took place in Hawaii and on USS Missouri. In the film, the crews of a small group of warships are forced to battle against a naval fleet of extraterrestrial origin in order to thwart their destructive goals. 
+# python-blyat
+
+*A delightful collection of handpicked terminal games made with Python.*
+
+**python-blyat** is a curated selection of classic games, all connected through a simple, user-friendly terminal menu. The collection includes:
+
+- 🚢 **Battleship** – A turn-based naval guessing game  
+- 🪢 **Hangman** – The classic word-guessing challenge  
+- 🎯 **Tic Tac Toe** – A strategic 2-player grid game  
+
+
+## 🚀 How to Start
+
+Make sure you have **Python 3** installed. Then, launch the main menu from your terminal:
+
+```bash
+python3 games.py
