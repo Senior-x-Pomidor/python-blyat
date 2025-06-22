@@ -6,35 +6,48 @@ def clear_terminal():
 
 wasser = f"\033[1;34m~\033[0m"
 
-field_show = [
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]],
-    [[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser],[wasser]] 
-]
+field_show =  []
 
-field_place = [
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []], 
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []],  
-    [[], [], [], [], [], [], [], [], [], []], 
-    [[], [], [], [], [], [], [], [], [], []], 
-    [[], [], [], [], [], [], [], [], [], []]    
-]
+field_place = []
+
+ships_to_place = []
+
+ships_location = []
+
+
+def reset_field(contents):
+
+
+    new_field = []
+    for z in range(10):
+        new_field.append([])
+        for zz in range(10):
+            new_field[z].append(list(contents))
+    return new_field
+
+def reset_fields():
+
+    global field_show
+    global field_place
+
+    field_show  = reset_field([wasser]) 
+    field_place = reset_field([])
+
+def reset_game():
+
+    reset_fields()
+
+    global ships_to_place 
+    global ships_location
+    ships_to_place = [[4], [3], [2], [1]]
+    ships_location = []
+
+
+
 
 letter_list = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
-ships_to_place = [[4], [3], [2], [1]]
-ships_location =[]
+
+
 
 def farbig(text, farbcode):
     return f"\033[{farbcode}m{text}\033[0m"
@@ -191,6 +204,7 @@ def place_ship():
         field_place[ii][jj].append(l)
 
 def placement_part():
+    reset_game()
     while not all(elem[0] == 0 for elem in ships_to_place):
         big_text("legacy")
         field_place_out()
@@ -210,10 +224,14 @@ def lets_sink_ships():
         check_for_destruction()
         clear_terminal()
         if all(ship['destroyed'] for ship in ships_location):
-            print("Alle Schiffe sind versenkt! Spiel beendet.")
+            big_text("legacy")
             field_show_out()
+            print("Alle Schiffe sind versenkt! Spiel beendet.")
+            input("Drücke Enter zum beenden:")
             break
         i = i+1
+
+
 
 
 
@@ -233,8 +251,8 @@ def big_text(text):
         print("\033[1;32m ___/ / /__/ / / / / __/ __/  __/   | |/ /  __/ /  (__  )  __/ / / / ,< /  __/ / / /\033[0m")
         print("\033[1;34m/____/\___/_/ /_/_/_/ /_/  \___/____|___/\___/_/  /____/\___/_/ /_/_/|_|\___/_/ /_/ \033[0m")
         print("\033[1;34m                              /_____/                                               \033[0m")
-        print("                                               by dani (Senior-x-Pomidor) "+last_update)
-        print(" \n \n \n \n \n")
+        print("by dani (Senior-x-Pomidor) "+last_update)
+        print("  \n \n \n \n \n")
 
     elif text == "legacy":
         print("\033[1;31m      __                                    \033[0m")
@@ -245,12 +263,13 @@ def big_text(text):
         print("\033[1;31m              /____/              /____/    \033[0m")
 
 def legacy():
-
     placement_part()
     clear_terminal()
     lets_sink_ships()
+    clear_terminal()
+    game_pick_mode_battleship()
 
-def game_pick_mode():
+def game_pick_mode_battleship():
 
     big_text("schiffe_versenken")
 
@@ -264,7 +283,10 @@ def game_pick_mode():
 
     while mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
-        mode = int(input("Zahl eingeben (1-4):"))
+        try:
+            mode = int(input("Zahl eingeben (1-4):"))
+        except:
+            mode = 0
         
         if mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
@@ -278,9 +300,12 @@ def game_pick_mode():
 
     if mode == 4:
         clear_terminal()
-        return print(farbig("\n" +"Exit    ", 31) + "\n")
+        return
 
-game_pick_mode()
+
+
+if __name__ == "__main__":
+    game_pick_mode_battleship()
 
 
 
