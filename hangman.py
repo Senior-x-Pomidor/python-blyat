@@ -1,5 +1,7 @@
 last_update = "22.06.2025"
 
+import random
+
 hangman_pictures =['''
           
           
@@ -172,7 +174,41 @@ words_offline = [
     "hell", "dunkel", "kalt", "warm", "freundlich",
     "rot", "blau", "grün", "gelb", "weiß",
     "Buch", "Tisch", "Stuhl", "Fenster", "Tür",
-    "Liebe", "Angst", "Freude", "Hoffnung", "Mut"
+    "Liebe", "Angst", "Freude", "Hoffnung", "Mut","Zwetschge", "Schmetterling", "Dachgeschoss", "Schnürsenkel", "Wortspiel",
+    "Unabhängigkeit", "Zustand", "Verständnis", "Rücksicht", "Einverständnis",
+    "Schattenseite", "Widerspruch", "Geistesblitz", "Zweifel", "Geduld",
+    "Entscheidung", "Achtsamkeit", "Gleichgewicht", "Zuneigung", "Verzweiflung",
+    "Lichtblick", "Vergangenheit", "Zukunft", "Gegenwart", "Verhalten",
+    "Verpflichtung", "Selbstvertrauen", "Mitgefühl", "Sicherheit", "Bedeutung",
+    "Erinnerung", "Vorstellung", "Einstellung", "Beziehung", "Verbindung",
+    "Lebensfreude", "Traurigkeit", "Einsamkeit", "Gemeinschaft", "Geborgenheit",
+    "Möglichkeit", "Herausforderung", "Verantwortung", "Begeisterung", "Zufriedenheit",
+    "Bescheidenheit", "Toleranz", "Neugier", "Ordnung", "Kreativität",
+    "Veränderung", "Entwicklung", "Sprachgefühl", "Fremdwort", "Unwort",
+    "Missverständnis", "Widerspiegelung", "Gedankenwelt", "Gedankenreise", "Wortschatz",
+    "Abenteuerlust", "Spiegelbild", "Feinfühligkeit", "Zielsicherheit", "Wertschätzung",
+    "Weisheit", "Sehnsucht", "Fernweh", "Heimweh", "Dankbarkeit",
+    "Vertrauen", "Verlust", "Zugänglichkeit", "Komplexität", "Differenzierung",
+    "Doppeldeutigkeit", "Ehrlichkeit", "Offenheit", "Wahrnehmung", "Beobachtung",
+    "Vernunft", "Instinkt", "Tageslicht", "Mondschein", "Sternenhimmel",
+    "Nebelschleier", "Regenschauer", "Gewitter", "Schneeflocke", "Frost",
+    "Tauwetter", "Glätte", "Eisregen", "Blitzschlag", "Donner",
+    "Flutwelle", "Erdrutsch", "Vulkanausbruch", "Hitzewelle", "Dürre",
+    "Hungersnot", "Lawine", "Sturmflut", "Orkan", "Tornado",
+    "Wirbelsturm", "Säugling", "Jugendlicher", "Erwachsener", "Rentner",
+    "Wissenschaftler", "Philosoph", "Dichter", "Denker", "Künstler",
+    "Schriftsteller", "Komponist", "Dirigent", "Erfinder", "Techniker",
+    "Mechaniker", "Bergarbeiter", "Bauer", "Zimmermann", "Maurer",
+    "Handwerker", "Gärtner", "Koch", "Bäcker", "Fleischer", "Zwischenzeit", "Zeitumstellung", "Rückenlehne", "Sicherheitsabstand", "Geschwindigkeitsbegrenzung",
+    "Wortneuschöpfung", "Rechtschreibfehler", "Leitplanke", "Autobahnausfahrt", "Kreuzung",
+    "Abzweigung", "Gegenverkehr", "Rücksichtslosigkeit", "Sprachverwirrung", "Rollenverteilung",
+    "Sinneswandel", "Buchstabensalat", "Großschreibung", "Kleinigkeit", "Alltäglichkeit",
+    "Zufallstreffer", "Verschwörung", "Märchenhaftigkeit", "Geräuschkulisse", "Denkfehler",
+    "Abstellgleis", "Entscheidungsfreiheit", "Fingerspitzengefühl", "Konzentrationsschwäche", "Überforderung",
+    "Lichtgeschwindigkeit", "Antriebslosigkeit", "Gleichgültigkeit", "Bequemlichkeit", "Verletzlichkeit",
+    "Kunstverständnis", "Technologie", "Gedankengang", "Kraftaufwand", "Buchhaltung",
+    "Rechtsprechung", "Anerkennung", "Unterbewusstsein", "Entschlossenheit", "Zielstrebigkeit",
+    "Sinnfrage", "Fremdscham", "Selbstbewusstsein", "Bewusstseinszustand", "Zwangsvorstellung"
 ]
 
 letter_ls =[]
@@ -328,6 +364,42 @@ def guess_word():
     wrong_letters_ls = []
     input("Enter drücken um fortzufahren:\n")
 
+def computer_hangman():
+
+    clear_terminal()
+
+    big_text("hangman")
+
+    print("Bitte Spielmodus auswählen:\n ")
+    print(farbig("1. Computer (Offline)", 32) + " zufällige Auswahl von gespeicherten Wörtern\n")
+    print(farbig("2. Computer (Online) ", 32) + " zufällige Auswahl von Wörtern aus dem Internetz (mehr Wörter) (noch nicht verfügbar)\n")
+    print(farbig("3. Exit              ", 31) + " \n---Zurück\n")
+
+    mode = 0
+
+    while mode != 1 and mode != 2 and mode != 3:
+
+        try:
+            mode = int(input("Zahl eingeben (1-3):"))
+        except:
+            mode = 0
+        
+        if mode != 1 and mode != 2 and mode != 3:
+
+            print("Ungültige Eingabe!")
+            
+    if mode == 1:
+        clear_terminal()
+        game_hanman_computer_offline()
+
+    if mode == 2:
+        clear_terminal()
+        return
+    
+    if mode == 3:
+        clear_terminal()
+        return
+
 def game_pick_mode_hangman():
 
     clear_terminal()
@@ -335,8 +407,8 @@ def game_pick_mode_hangman():
     big_text("hangman")
 
     print("Bitte Spielmodus auswählen:\n ")
-    print(farbig("1. 1 v many", 32) + " mind. 2 Spieler\n---Einer gibt ein, die anderen raten!\n")
-    print(farbig("2. Computer  ", 32) + " 1 Spieler\n---Gegen den Computer Spielen                  (noch nicht verfügbar)\n")
+    print(farbig("1. 1 v many  ", 32) + " mind. 2 Spieler\n---Einer gibt ein, die anderen raten!\n")
+    print(farbig("2. Computer  ", 32) + " mind. 1 Spieler\n---Gegen den Computer Spielen\n")  
     print(farbig("3. Exit      ", 31) + " \n---Spiel schließen\n")
 
 
@@ -357,6 +429,10 @@ def game_pick_mode_hangman():
     if mode == 1:
         clear_terminal()
         game_hangman_1_v_many()
+
+    if mode == 2:
+        clear_terminal()
+        computer_hangman()
     
     if mode == 3:
         clear_terminal()
@@ -364,10 +440,101 @@ def game_pick_mode_hangman():
     
 def game_hangman_1_v_many():
 
+
     clear_terminal()
     big_text("hangman")
     guess_word()
     game_pick_mode_hangman()
         
+def pick_random_word():
+
+    random_word = random.choice(words_offline)
+
+    global letter_ls
+    letter_ls = [] 
+
+    for letter in random_word:
+        letter_ls.append(letter)
+
+    print("Das geheime Wort wurde vom Computer betimmt!")
+    input("Enter drücken...")
+
+def game_hanman_computer_offline():
+
+    global letter_ls
+    global wrong_letters_ls
+
+    big_text("hangman")
+    diffi = difficulty()
+    pick_random_word()
+    show = ["_" for _ in letter_ls]
+
+    # Setze die erlaubte Anzahl an Fehlversuchen je nach Schwierigkeitsgrad
+    if diffi == 1:
+        max_turns = 15
+    elif diffi == 2:
+        max_turns = 10
+    else:
+        max_turns = 5
+
+    turns = 0
+    wrong_letters_ls = []
+
+    while turns < max_turns and "_" in show:
+        clear_terminal()
+        big_text("hangman")
+        print(f"Zug Nr. {turns + 1} von {max_turns}")
+
+        # Bild proportional zur Fehleranzahl anzeigen
+        pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+        print(hangman_pictures[pic_index] + "\n")
+
+        print("Wort: " + " ".join(show))
+        print("Falsche Buchstaben: " + ", ".join(wrong_letters_ls))
+        print("Buchstaben-Tipp abgeben:\n")
+        guess = input().lower()
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("Bitte genau einen Buchstaben eingeben!")
+            input("Enter drücken...")
+            continue
+
+        if guess.upper() in wrong_letters_ls or guess in [l.lower() for l in show]:
+            print("Buchstabe wurde schon geraten!")
+            input("Enter drücken...")
+            continue
+
+        found = False
+        for index, letter in enumerate(letter_ls):
+            if letter.lower() == guess:
+                show[index] = letter
+                found = True
+
+        if found:
+            print("Treffer!\n")
+        else:
+            print("Das war wohl nix!")
+            wrong_letters_ls.append(guess.upper())
+            turns += 1
+
+        input("Enter drücken für den nächsten Zug...")
+
+    clear_terminal()
+    big_text("hangman")
+    # Nach Spielende das finale Bild anzeigen
+    pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+    print(hangman_pictures[pic_index])
+    if "_" not in show:
+        print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+    else:
+        print("Leider verloren! Das Wort war:", "".join(letter_ls))
+
+    letter_ls = []
+    wrong_letters_ls = []
+    input("Enter drücken um fortzufahren:\n")
+    game_pick_mode_hangman()
+
+
+
 if __name__ == "__main__":
     game_pick_mode_hangman()
