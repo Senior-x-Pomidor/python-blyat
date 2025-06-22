@@ -35,7 +35,7 @@ def games_start():
     "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n\n" \
     "Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1. ", 32) + "Schiffe_Versenken\n")
-    print(farbig("- 2. ", 32) + "Galgenmännchen           (noch nicht verfügbar)\n")
+    print(farbig("- 2. ", 32) + "Galgenmännchen\n")
     print(farbig("- 3. " , 32) + "Tic-Tac-Toe\n\n")
     print("Nummer des Spiels auswählen (Zahl von"+ farbig(" 1-3", 32) +") oder"+ farbig(" Exit ", 31) + "eintippen zum beenden:")
 
