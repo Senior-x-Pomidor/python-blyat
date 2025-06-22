@@ -1,6 +1,7 @@
 last_update = "22.06.2025"
 
 import random
+import urllib.request
 
 hangman_pictures =['''
           
@@ -365,40 +366,23 @@ def guess_word():
     input("Enter drücken um fortzufahren:\n")
 
 def computer_hangman():
-
     clear_terminal()
-
     big_text("hangman")
-
     print("Bitte Spielmodus auswählen:\n ")
     print(farbig("1. Computer (Offline)", 32) + " zufällige Auswahl von gespeicherten Wörtern\n")
-    print(farbig("2. Computer (Online) ", 32) + " zufällige Auswahl von Wörtern aus dem Internetz (mehr Wörter) (noch nicht verfügbar)\n")
+    print(farbig("2. Computer (Online) ", 32) + " zufällige Auswahl von Wörtern aus dem Internetz (50k Wörter, Verbindung nötig)\n")
     print(farbig("3. Exit              ", 31) + " \n---Zurück\n")
 
     mode = 0
-
-    while mode != 1 and mode != 2 and mode != 3:
-
+    while mode not in (1, 2, 3):
         try:
             mode = int(input("Zahl eingeben (1-3):"))
         except:
             mode = 0
-        
-        if mode != 1 and mode != 2 and mode != 3:
-
+        if mode not in (1, 2, 3):
             print("Ungültige Eingabe!")
-            
-    if mode == 1:
-        clear_terminal()
-        game_hanman_computer_offline()
-
-    if mode == 2:
-        clear_terminal()
-        return
-    
-    if mode == 3:
-        clear_terminal()
-        return
+    clear_terminal()
+    return mode
 
 def game_pick_mode_hangman():
 
@@ -432,8 +416,8 @@ def game_pick_mode_hangman():
 
     if mode == 2:
         clear_terminal()
-        computer_hangman()
-    
+        game_hanman_computer_offline_online()
+
     if mode == 3:
         clear_terminal()
         return
@@ -459,14 +443,48 @@ def pick_random_word():
     print("Das geheime Wort wurde vom Computer betimmt!")
     input("Enter drücken...")
 
-def game_hanman_computer_offline():
+def pick_random_word_online():
+
+    url = "https://raw.githubusercontent.com/hermitdave/FrequencyWords/master/content/2016/de/de_50k.txt"
+
+    global letter_ls
+    letter_ls = [] 
+
+    try:
+        # Datei öffnen und Zeilen direkt durchiterieren
+        with urllib.request.urlopen(url) as resp:
+            # Jede Zeile decodieren und nur das erste Token (das Wort) nehmen
+            word = [line.decode('utf-8').split()[0] 
+                for line in resp 
+                    if line.strip()]
+        random_word = random.choice(word)
+        for letter in random_word:
+            letter_ls.append(letter)
+        print("Das geheime Wort wurde vom Computer aus den Tiefen des Neulands bestimmt!")
+        input("Enter drücken...")
+    except Exception as e:
+        # Fallback-Meldung bei Netzwerk-Fehlern
+        return f"Fehler beim Abrufen: {e}"
+
+def game_hanman_computer_offline_online():
 
     global letter_ls
     global wrong_letters_ls
 
+    zz = computer_hangman()
+
     big_text("hangman")
     diffi = difficulty()
-    pick_random_word()
+
+    if zz == 1:
+
+        pick_random_word()
+    
+    elif zz == 2:
+
+        pick_random_word_online()
+
+
     show = ["_" for _ in letter_ls]
 
     # Setze die erlaubte Anzahl an Fehlversuchen je nach Schwierigkeitsgrad
