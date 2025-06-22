@@ -162,6 +162,22 @@ hangman_pictures =['''
   ───┴───   
  /       \  ''']
 
+words_offline = [
+    "Haus", "Baum", "Auto", "Straße", "Fahrrad",
+    "Wasser", "Feuer", "Luft", "Erde", "Himmel",
+    "Hund", "Katze", "Vogel", "Fisch", "Pferd",
+    "laufen", "springen", "schlafen", "denken", "sehen",
+    "reden", "schreiben", "lesen", "lernen", "spielen",
+    "schön", "groß", "klein", "schnell", "langsam",
+    "hell", "dunkel", "kalt", "warm", "freundlich",
+    "rot", "blau", "grün", "gelb", "weiß",
+    "Buch", "Tisch", "Stuhl", "Fenster", "Tür",
+    "Liebe", "Angst", "Freude", "Hoffnung", "Mut"
+]
+
+letter_ls =[]
+wrong_letters_ls = [] 
+
 def clear_terminal():
 
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -226,6 +242,92 @@ def difficulty():
         clear_terminal()
         game_pick_mode_hangman()
 
+def word_input():
+
+    clear_terminal()
+
+    big_text("hangman")
+
+    print("Jetzt das geheimsnissvolle Wort eingeben:\n")
+    word = str(input())
+    global letter_ls
+    letter_ls = [] 
+
+    for letter in word:
+        letter_ls.append(letter)
+
+def guess_word():
+    global letter_ls
+    global wrong_letters_ls
+
+    diffi = difficulty()
+    word_input()
+    show = ["_" for _ in letter_ls]
+
+    # Setze die erlaubte Anzahl an Fehlversuchen je nach Schwierigkeitsgrad
+    if diffi == 1:
+        max_turns = 15
+    elif diffi == 2:
+        max_turns = 10
+    else:
+        max_turns = 5
+
+    turns = 0
+    wrong_letters_ls = []
+
+    while turns < max_turns and "_" in show:
+        clear_terminal()
+        big_text("hangman")
+        print(f"Zug Nr. {turns + 1} von {max_turns}")
+
+        # Bild proportional zur Fehleranzahl anzeigen
+        pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+        print(hangman_pictures[pic_index] + "\n")
+
+        print("Wort: " + " ".join(show))
+        print("Falsche Buchstaben: " + ", ".join(wrong_letters_ls))
+        print("Buchstaben-Tipp abgeben:\n")
+        guess = input().lower()
+
+        if len(guess) != 1 or not guess.isalpha():
+            print("Bitte genau einen Buchstaben eingeben!")
+            input("Enter drücken...")
+            continue
+
+        if guess.upper() in wrong_letters_ls or guess in [l.lower() for l in show]:
+            print("Buchstabe wurde schon geraten!")
+            input("Enter drücken...")
+            continue
+
+        found = False
+        for index, letter in enumerate(letter_ls):
+            if letter.lower() == guess:
+                show[index] = letter
+                found = True
+
+        if found:
+            print("Treffer!\n")
+        else:
+            print("Das war wohl nix!")
+            wrong_letters_ls.append(guess.upper())
+            turns += 1
+
+        input("Enter drücken für den nächsten Zug...")
+
+    clear_terminal()
+    big_text("hangman")
+    # Nach Spielende das finale Bild anzeigen
+    pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+    print(hangman_pictures[pic_index])
+    if "_" not in show:
+        print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+    else:
+        print("Leider verloren! Das Wort war:", "".join(letter_ls))
+
+    letter_ls = []
+    wrong_letters_ls = []
+    input("Enter drücken um fortzufahren:\n")
+
 def game_pick_mode_hangman():
 
     clear_terminal()
@@ -233,8 +335,8 @@ def game_pick_mode_hangman():
     big_text("hangman")
 
     print("Bitte Spielmodus auswählen:\n ")
-    print(farbig("1. 1 v many", 32) + " mind. 1 Spieler\n---Einfach gegeneinander spielen!\n")
-    print(farbig("2. Computer  ", 32) + " 1 Spieler\n---Gegen den Computer Spielen            (noch nicht verfügbar)\n")
+    print(farbig("1. 1 v many", 32) + " mind. 2 Spieler\n---Einer gibt ein, die anderen raten!\n")
+    print(farbig("2. Computer  ", 32) + " 1 Spieler\n---Gegen den Computer Spielen                  (noch nicht verfügbar)\n")
     print(farbig("3. Exit      ", 31) + " \n---Spiel schließen\n")
 
 
@@ -262,44 +364,10 @@ def game_pick_mode_hangman():
     
 def game_hangman_1_v_many():
 
-    big_text("hangman")
-    diffi = difficulty()
     clear_terminal()
-
-    if diffi==1:
-
-        turns_multi = 0
-
-    elif diffi==2:
-
-        turns_multi = 5
-    else:
-
-        turns_multi = 10
-
-    while turns_multi <=15:
-        print("Zug Nr.", turns_multi)
-        print(hangman_pictures[turns_multi])
-        turns_multi =  turns_multi+1
-
-    
-
-    print("Leider verloren)")
-    input("Enter drücken um fortzufahren:\n")
+    big_text("hangman")
+    guess_word()
     game_pick_mode_hangman()
         
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     game_pick_mode_hangman()

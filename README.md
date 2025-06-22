@@ -11,7 +11,7 @@
 
 ## 🚀 How to Start
 
-Make sure you have **Python 3** installed. Then, launch the main menu from your terminal:
+Make sure you have **Python** installed. Then, launch the main menu from your terminal:
 
 ```bash
 python3 games.py
