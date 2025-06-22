@@ -13,7 +13,7 @@ def big_text(text):
 
             print("\033[1;31m  ______ _            ______                  ______           \033[0m")
             print("\033[1;31m /_  __/(_)_____     /_  __/____ _ _____     /_  __/____   ___ \033[0m")
-            print("\033[1;33m  / /  / // ___/      / /  / __ `// ___/      / /  / __ \ / _ \\033[0m")
+            print("\033[1;33m  / /  / // ___/      / /  / __ `// ___/      / /  / __ \ / _ \\""\033[0m")
             print("\033[1;32m / /  / // /__       / /  / /_/ // /__       / /  / /_/ //  __/\033[0m")
             print("\033[1;34m/_/  /_/ \___/______/_/   \__,_/ \___/______/_/   \____/ \___/ \033[0m")
             print("\033[1;34m             /_____/                 /_____/                   \033[0m")
@@ -27,6 +27,10 @@ empty = " "
 
 
 def game_tic_tac_toe_1v1():
+
+    for line in field:
+        line.clear()                    
+        line.extend([" "] * 3)  
 
 
     win = False
@@ -137,6 +141,8 @@ def game_pick_mode_tic_tac_toe():
     print(farbig("1. 1v1       ", 32) + " 2 Spieler\n---Einfach gegeneinander spielen!\n")
     print(farbig("2. Computer  ", 32) + " 1 Spieler\n---Gegen den Computer Spielen            (noch nicht verfügbar)\n")
     print(farbig("3. Exit      ", 31) + " \n---Spiel schließen\n")
+
+
 
     mode = 0
 
