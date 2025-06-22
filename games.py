@@ -2,6 +2,7 @@ last_update = "22.06.2025"
 
 import battleship
 import tic_tac_toe
+import hangman
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -56,6 +57,10 @@ def games_start():
     if game == 1:
         clear_terminal()
         battleship.game_pick_mode_battleship()
+
+    if game ==2:
+        clear_terminal()
+        hangman.game_pick_mode_hangman()
     
     if game == 3:
         clear_terminal()
