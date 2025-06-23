@@ -189,7 +189,7 @@ words_offline = [
     "Missverständnis", "Widerspiegelung", "Gedankenwelt", "Gedankenreise", "Wortschatz",
     "Abenteuerlust", "Spiegelbild", "Feinfühligkeit", "Zielsicherheit", "Wertschätzung",
     "Weisheit", "Sehnsucht", "Fernweh", "Heimweh", "Dankbarkeit",
-    "Vertrauen", "Verlust", "Zugänglichkeit", "Komplexität", "Differenzierung",
+    "Vertrauen", "Verlust", "Versuchänglichkeit", "Komplexität", "Differenzierung",
     "Doppeldeutigkeit", "Ehrlichkeit", "Offenheit", "Wahrnehmung", "Beobachtung",
     "Vernunft", "Instinkt", "Tageslicht", "Mondschein", "Sternenhimmel",
     "Nebelschleier", "Regenschauer", "Gewitter", "Schneeflocke", "Frost",
@@ -248,11 +248,11 @@ def difficulty():
 
 
     print("Schwierigkeit wählen:")
-    print("- Diese beinflusst die Anzahl der verfügbaren Züge:\n ")
+    print("- Diese beinflusst die Anzahl der verfügbaren Versuche:\n ")
 
-    print(farbig("1. Einfach", 32) + " 15 Züge\n")
-    print(farbig("2. Mittel ", 32) + " 10 Züge\n")
-    print(farbig("3. Schwer ", 32) + "  5 Züge\n")
+    print(farbig("1. Einfach", 32) + " 15 Versuche\n")
+    print(farbig("2. Mittel ", 32) + " 10 Versuche\n")
+    print(farbig("3. Schwer ", 32) + "  5 Versuche\n")
     print(farbig("4. Exit   ", 31) + " Zurück in das Menü\n")
 
     difficulty = 0
@@ -296,6 +296,7 @@ def word_input():
 def guess_word():
     global letter_ls
     global wrong_letters_ls
+    answer = False  # Fix: Initialize answer to avoid UnboundLocalError
 
     diffi = difficulty()
     word_input()
@@ -309,27 +310,36 @@ def guess_word():
     else:
         max_turns = 5
 
-    turns = 0
+    misses = 0
+    turn = 1
     wrong_letters_ls = []
 
-    while turns < max_turns and "_" in show:
+    while misses < max_turns and "_" in show:
+        turn = turn+1
         clear_terminal()
         big_text("hangman")
-        print(f"Zug Nr. {turns + 1} von {max_turns}")
+        print(f"Fehler: {misses} von {max_turns}"+ " "*17 + f"Zug Nr. {turn-1}")
 
         # Bild proportional zur Fehleranzahl anzeigen
-        pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+        pic_index = min(int(misses * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures)-1)
         print(hangman_pictures[pic_index] + "\n")
 
         print("Wort: " + " ".join(show))
-        print("Falsche Buchstaben: " + ", ".join(wrong_letters_ls))
-        print("Buchstaben-Tipp abgeben:\n")
+        print("Falsche Buchstaben oder Wörter: " + ", ".join(wrong_letters_ls))
+        print("Buchstaben-Tipp abgeben, oder ganzes Wort:\n")
         guess = input().lower()
 
-        if len(guess) != 1 or not guess.isalpha():
-            print("Bitte genau einen Buchstaben eingeben!")
+        if guess.lower() == "".join(letter.lower() for letter in letter_ls):
+            answer = True
+            break
+        
+        if guess.lower() == "":
+
+            print("Keine Eingabe!")
             input("Enter drücken...")
+
             continue
+
 
         if guess.upper() in wrong_letters_ls or guess in [l.lower() for l in show]:
             print("Buchstabe wurde schon geraten!")
@@ -347,16 +357,19 @@ def guess_word():
         else:
             print("Das war wohl nix!")
             wrong_letters_ls.append(guess.upper())
-            turns += 1
+            misses += 1
 
-        input("Enter drücken für den nächsten Zug...")
+        input("Enter drücken für den nächsten Versuch...")
 
     clear_terminal()
     big_text("hangman")
+    print(f"Fehler: {misses} von {max_turns}"+ " "*17 + f"Zug Nr. {turn-1}")
     # Nach Spielende das finale Bild anzeigen
-    pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+    pic_index = min(int(misses * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
     print(hangman_pictures[pic_index]+"\n")
-    if "_" not in show:
+    if "_" not in show :
+        print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+    elif answer == True:
         print("Glückwunsch! Das Wort war:", "".join(letter_ls))
     else:
         print("Leider verloren! Das Wort war:", "".join(letter_ls))
@@ -470,6 +483,7 @@ def game_hanman_computer_offline_online():
 
     global letter_ls
     global wrong_letters_ls
+    answer = False  # Fix: Initialize answer to avoid UnboundLocalError
 
     zz = computer_hangman()
 
@@ -495,16 +509,17 @@ def game_hanman_computer_offline_online():
     else:
         max_turns = 5
 
-    turns = 0
+    misses = 0
+    turn = 1
     wrong_letters_ls = []
 
-    while turns < max_turns and "_" in show:
+    while misses < max_turns and "_" in show:
         clear_terminal()
         big_text("hangman")
-        print(f"Zug Nr. {turns + 1} von {max_turns}")
+        print(f"Fehler: {misses} von {max_turns}"+ " "*17 + f"Zug Nr. {turn-1}")
 
         # Bild proportional zur Fehleranzahl anzeigen
-        pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+        pic_index = min(int(misses * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures)-1)
         print(hangman_pictures[pic_index] + "\n")
 
         print("Wort: " + " ".join(show))
@@ -512,10 +527,17 @@ def game_hanman_computer_offline_online():
         print("Buchstaben-Tipp abgeben:\n")
         guess = input().lower()
 
-        if len(guess) != 1 or not guess.isalpha():
-            print("Bitte genau einen Buchstaben eingeben!")
+        if guess.lower() == "".join(letter.lower() for letter in letter_ls):
+            answer = True
+            break
+
+        if guess.lower() == "":
+
+            print("Keine Eingabe!")
             input("Enter drücken...")
+
             continue
+
 
         if guess.upper() in wrong_letters_ls or guess in [l.lower() for l in show]:
             print("Buchstabe wurde schon geraten!")
@@ -533,16 +555,19 @@ def game_hanman_computer_offline_online():
         else:
             print("Das war wohl nix!")
             wrong_letters_ls.append(guess.upper())
-            turns += 1
+            misses += 1
 
-        input("Enter drücken für den nächsten Zug...")
+        input("Enter drücken für den nächsten Versuch...")
 
     clear_terminal()
     big_text("hangman")
+    print(f"Fehler: {misses} von {max_turns}"+ " "*17 + f"Zug Nr. {turn-1}")
     # Nach Spielende das finale Bild anzeigen
-    pic_index = min(int(turns * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
+    pic_index = min(int(misses * (len(hangman_pictures) - 1) / max_turns), len(hangman_pictures) - 1)
     print(hangman_pictures[pic_index])
     if "_" not in show:
+        print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+    elif answer == True:
         print("Glückwunsch! Das Wort war:", "".join(letter_ls))
     else:
         print("Leider verloren! Das Wort war:", "".join(letter_ls))
