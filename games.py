@@ -1,8 +1,9 @@
-last_update = "22.06.2025"
+last_update = "23.06.2025"
 
 import battleship
 import tic_tac_toe
 import hangman
+import animation_why
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -29,10 +30,12 @@ def games_start():
     clear_terminal()
 
     big_text("games")
+    
 
     print("Willkommen zu einer erlesenen Auswahl an Klassikern!\n\n" \
     "- Alle Spiele laufen ohne Installation zusätzlicher Bibliotheken.\n" \
-    "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n\n" \
+    "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n" \
+    "- Bitte nicht" + "!@#*()_+{ }|$%^&: <> ? [ ] \;', ./." +" eingeben!\n\n" \
     "Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1. ", 32) + "Schiffe_Versenken\n")
     print(farbig("- 2. ", 32) + "Galgenmännchen\n")
@@ -44,6 +47,11 @@ def games_start():
     while game != 1 and game != 2 and game != 3 and game != "Exit":
 
         game = input("Eingabe:")
+
+        secret = r"""!@#*()_+{ }|$%^&: "<> ? [ ] \;', ./"""
+
+        if game == secret:
+            animation_why.anim_1()
 
         try:
             game = int(game)
