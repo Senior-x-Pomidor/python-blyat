@@ -185,7 +185,7 @@ def play_tic_tac_toe_2():
     big_text("tic_tac_toe_2")
     display_play_field()
     if winner:
-        print("Es war eine fesselde Schlacht!")
+        print("Es war eine fesselnde Schlacht!")
         print(f"Spieler {farbig_spieler(winner)} hat gewonnen!")
         input("Enter drücken...")
     else:
