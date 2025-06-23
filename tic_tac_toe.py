@@ -166,7 +166,7 @@ def game_pick_mode_tic_tac_toe():
     
     if mode == 3:
         clear_terminal()
-        tic_tac_toe_2.play_tic_tac_toe_2()
+#        tic_tac_toe_2.play_tic_tac_toe_2()
 
 
     if mode == 4:
