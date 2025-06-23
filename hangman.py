@@ -440,7 +440,7 @@ def pick_random_word():
     for letter in random_word:
         letter_ls.append(letter)
 
-    print("Das geheime Wort wurde vom Computer betimmt!")
+    print("Das geheime Wort wurde vom Computer bestimmt!")
     input("Enter drücken...")
 
 def pick_random_word_online():

@@ -4198,7 +4198,7 @@ def anim_1():
         Wartet blockierend auf Enter, setzt dann stop=True.
         """
         input()   # nur Enter drücken
-        global stop
+        nonlocal stop
         stop = True
 
     # Daemon-Thread starten
