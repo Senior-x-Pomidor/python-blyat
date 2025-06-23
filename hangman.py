@@ -523,8 +523,8 @@ def game_hanman_computer_offline_online():
         print(hangman_pictures[pic_index] + "\n")
 
         print("Wort: " + " ".join(show))
-        print("Falsche Buchstaben: " + ", ".join(wrong_letters_ls))
-        print("Buchstaben-Tipp abgeben:\n")
+        print("Falsche Buchstaben oder Wörter: " + ", ".join(wrong_letters_ls))
+        print("Buchstaben-Tipp abgeben, oder ganzes Wort:\n")
         guess = input().lower()
 
         if guess.lower() == "".join(letter.lower() for letter in letter_ls):
