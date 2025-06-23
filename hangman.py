@@ -514,6 +514,7 @@ def game_hanman_computer_offline_online():
     wrong_letters_ls = []
 
     while misses < max_turns and "_" in show:
+        turn = turn+1
         clear_terminal()
         big_text("hangman")
         print(f"Fehler: {misses} von {max_turns}"+ " "*17 + f"Zug Nr. {turn-1}")
