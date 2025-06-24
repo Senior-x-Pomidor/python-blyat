@@ -16,9 +16,8 @@ def calc_digits(field):
 def print_board():
     for row in board:
         for field in row:
-            # todo: use log10 to determine how many digits
             digits = calc_digits(field)
-            print(f'[{' ' * field_size}{field}]', end='')
+            print(f'[{' ' * (field_size - digits)}{field}]', end='')
         print()
 
 
