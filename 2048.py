@@ -39,6 +39,11 @@ def play_move(direction):
                 x = j
                 while x > 0 and row[x - 1] == ' ':
                     x -= 1
+                
+                if x > 0 and row[x - 1] == field:
+                    x -= 1
+                    field += field
+
                 board[i][j] = ' '
                 board[i][x] = field
 
@@ -52,6 +57,11 @@ def play_move(direction):
                 x = j
                 while x < len(row) - 1 and row[x + 1] == ' ':
                     x += 1
+
+                if x < len(row) - 1 and row[x + 1] == field:
+                    x += 1
+                    field += field
+
                 board[i][j] = ' '
                 board[i][x] = field
 
