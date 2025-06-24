@@ -32,6 +32,15 @@ def play_move(direction):
         print('move up')
     elif direction == 'A':
         print('move left')
+        for i, row in enumerate(board):
+            for j, field in enumerate(row):
+                if j == 0: continue
+                x = j
+                while x >= 0 and row[x - 1] == ' ':
+                    x -= 1
+                board[i][j] = ' '
+                board[i][x] = field
+
     elif direction == 'S':
         print('move down')
     elif direction == 'D':
@@ -39,6 +48,9 @@ def play_move(direction):
     else:
         print('input error')
         return
+    
+    add_random_tile()
+    print_board()
 
 
 def start_game():
