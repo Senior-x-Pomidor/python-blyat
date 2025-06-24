@@ -6,6 +6,7 @@ board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
 def print_board():
     for row in board:
         for field in row:
+            # todo: use log10 to determine how many digits
             print(f'[{field}]', end='')
         print()
 
@@ -31,6 +32,18 @@ def play_move(direction):
 
     if direction == 'W':
         print('move up')
+        for i, row in enumerate(board):
+            for j, field in enumerate(row):
+                x = i
+                while x > 0 and board[x - 1][j] == ' ':
+                    x -= 1
+
+                if x > 0 and board[x - 1][j] == field:
+                    x -= 1
+                    field += field
+
+                board[i][j] = ' '
+                board[x][j] = field
 
     elif direction == 'A':
         print('move left')
@@ -49,6 +62,7 @@ def play_move(direction):
 
     elif direction == 'S':
         print('move down')
+
 
     elif direction == 'D':
         print('move right')
