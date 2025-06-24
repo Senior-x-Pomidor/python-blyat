@@ -5,17 +5,19 @@ board_size = 4
 field_size = 4
 board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
 
+def calc_digits(field):
+    try:
+        number = int(field)
+        return math.floor(math.log(number, 10)) + 1
+        # note: log(1000, 10) equals 2.99999 here
+    except:
+        return 1
+
 def print_board():
     for row in board:
         for field in row:
             # todo: use log10 to determine how many digits
-            digits = 1
-            try:
-                f = int(field)
-                digits = math.floor(math.log(f, 10)) + 1
-            except:
-                digits = 1
-
+            digits = calc_digits(field)
             print(f'[{' ' * field_size}{field}]', end='')
         print()
 
