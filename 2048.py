@@ -10,8 +10,6 @@ def print_board():
         print()
 
 
-print_board()
-
 def add_random_tile():
     new_tile = 2
     free_fields = []
@@ -24,8 +22,42 @@ def add_random_tile():
 
     # pick a free field
     picked_field = random.choice(free_fields)
+
+    # set the picked field to new tile
     board[picked_field[0]][picked_field[1]] = new_tile
 
-print()
-add_random_tile()
-print_board()
+
+def play_move(direction):
+    if direction == 'W':
+        print('move up')
+    elif direction == 'A':
+        print('move left')
+    elif direction == 'S':
+        print('move down')
+    elif direction == 'D':
+        print('move right')
+    else:
+        print('input error')
+        return
+
+
+def start_game():
+    add_random_tile()
+    print_board()
+
+    while True:
+        i = input()
+        i = i.capitalize()
+        if i == 'Q' or i == 'EXIT':
+            break
+
+        if i != 'W' and i != 'A' and i != 'S' and i != 'D':
+            print('Ungültige Eingabe!')
+            continue
+
+        play_move(i)
+
+    print('game over')
+
+
+start_game()
