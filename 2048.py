@@ -48,7 +48,7 @@ def play_move(direction):
     elif direction == 'D':
         print('move right')
         for i, row in enumerate(board):
-            for j, field in enumerate(row):
+            for j, field in reversed(list(enumerate(row))):
                 x = j
                 while x < len(row) - 1 and row[x + 1] == ' ':
                     x += 1
