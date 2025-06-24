@@ -142,7 +142,7 @@ def game_pick_mode_tic_tac_toe():
     print("Bitte Spielmodus auswählen:\n ")
     print(farbig("1. 1v1            ", 32) + " 2 Spieler\n---Einfach gegeneinander spielen!\n")
     print(farbig("2. Computer       ", 32) + " 1 Spieler\n---Gegen den Computer Spielen            (noch nicht verfügbar)\n")
-    print(farbig("3. tic_tac_toe_2  ", 32) + " Neuer, Schöner, Besser! \n")
+    print(farbig("3. tic_tac_toe_2  ", 32) + " 2 Spieler\n---Neuer, Schöner, Besser! \n")
     print(farbig("4. Exit           ", 31) + " \n---Spiel schließen\n")
 
 
