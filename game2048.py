@@ -1,13 +1,22 @@
 import random
+import math
 
 board_size = 4
+field_size = 4
 board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
 
 def print_board():
     for row in board:
         for field in row:
             # todo: use log10 to determine how many digits
-            print(f'[{field}]', end='')
+            digits = 1
+            try:
+                f = int(field)
+                digits = math.floor(math.log(f, 10)) + 1
+            except:
+                digits = 1
+
+            print(f'[{' ' * field_size}{field}]', end='')
         print()
 
 
