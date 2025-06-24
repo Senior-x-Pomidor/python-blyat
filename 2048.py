@@ -62,6 +62,18 @@ def play_move(direction):
 
     elif direction == 'S':
         print('move down')
+        for i, row in reversed(list(enumerate(board))):
+            for j, field in enumerate(row):
+                x = i
+                while x < len(board) - 1 and board[x + 1][j] == ' ':
+                    x += 1
+
+                if x < len(board) - 1 and board[x + 1][j] == field:
+                    x += 1
+                    field += field
+
+                board[i][j] = ' '
+                board[x][j] = field
 
 
     elif direction == 'D':
