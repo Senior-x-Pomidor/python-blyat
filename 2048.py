@@ -1,7 +1,7 @@
 import random
 
-field_size = 4
-board = [[' ' for _ in range(field_size)] for _ in range(field_size)]
+board_size = 4
+board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
 
 def print_board():
     for row in board:
@@ -28,23 +28,33 @@ def add_random_tile():
 
 
 def play_move(direction):
+
     if direction == 'W':
         print('move up')
+
     elif direction == 'A':
         print('move left')
         for i, row in enumerate(board):
             for j, field in enumerate(row):
-                if j == 0: continue
                 x = j
-                while x >= 0 and row[x - 1] == ' ':
+                while x > 0 and row[x - 1] == ' ':
                     x -= 1
                 board[i][j] = ' '
                 board[i][x] = field
 
     elif direction == 'S':
         print('move down')
+
     elif direction == 'D':
         print('move right')
+        for i, row in enumerate(board):
+            for j, field in enumerate(row):
+                x = j
+                while x < len(row) - 1 and row[x + 1] == ' ':
+                    x += 1
+                board[i][j] = ' '
+                board[i][x] = field
+
     else:
         print('input error')
         return
