@@ -1,5 +1,6 @@
 last_update = "24.06.2025"
 
+import tic_tac_toe_2
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -166,7 +167,7 @@ def game_pick_mode_tic_tac_toe():
     
     if mode == 3:
         clear_terminal()
-#        tic_tac_toe_2.play_tic_tac_toe_2()
+        tic_tac_toe_2.main_tic_tac_toe_2()
 
 
     if mode == 4:
