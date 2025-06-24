@@ -1,4 +1,4 @@
-
+import tic_tac_toe
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
     print("\033[H\033[J", end="")
@@ -131,6 +131,8 @@ def check_win():
 
     return False
 
+
+
 def main_tic_tac_toe_2():
 
     create_field()
@@ -140,13 +142,23 @@ def main_tic_tac_toe_2():
         big_text("tic_tac_toe_2")
         switch_player()
         move_on_field()
+
         if check_win() == True:
-            
+            clear_terminal()
+            big_text("tic_tac_toe_2")
+            display_field()
+            print("Spieler " + player + " hat gewonnen!")
+            input("Enter drücken...")
+            break
+        elif " " not in state_dict.values():
+            clear_terminal()
+            big_text("tic_tac_toe_2")
+            display_field()
+            print("Unentschieden!")
+            input("Enter drücken...")
             break
     clear_terminal()
-    big_text("tic_tac_toe_2")
-    display_field()
-    print("Spieler " + player + " hat gewonnen!")
+    tic_tac_toe.game_pick_mode_tic_tac_toe()
 
 
 
