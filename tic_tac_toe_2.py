@@ -1,4 +1,5 @@
 import tic_tac_toe
+
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
     print("\033[H\033[J", end="")
@@ -131,7 +132,7 @@ def check_win():
 
     return False
 
-
+##############################################################################################################################################################################################
 
 def main_tic_tac_toe_2():
 
@@ -159,9 +160,6 @@ def main_tic_tac_toe_2():
             break
     clear_terminal()
     tic_tac_toe.game_pick_mode_tic_tac_toe()
-
-
-
 
 if __name__ == "__main__":
     main_tic_tac_toe_2()
