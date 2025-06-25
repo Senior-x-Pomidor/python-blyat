@@ -1,4 +1,6 @@
-last_update = "22.06.2025"
+last_update = "24.06.2025"
+
+import tic_tac_toe_2
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -138,32 +140,37 @@ def game_pick_mode_tic_tac_toe():
     big_text("tic_tac_toe")
 
     print("Bitte Spielmodus auswählen:\n ")
-    print(farbig("1. 1v1       ", 32) + " 2 Spieler\n---Einfach gegeneinander spielen!\n")
-    print(farbig("2. Computer  ", 32) + " 1 Spieler\n---Gegen den Computer Spielen            (noch nicht verfügbar)\n")
-    print(farbig("3. Exit      ", 31) + " \n---Spiel schließen\n")
+    print(farbig("1. 1v1            ", 32) + " 2 Spieler\n---Einfach gegeneinander spielen!\n")
+    print(farbig("2. Computer       ", 32) + " 1 Spieler\n---Gegen den Computer Spielen            (noch nicht verfügbar)\n")
+    print(farbig("3. tic_tac_toe_2  ", 32) + " 2 Spieler\n---Neuer, Schöner, Besser! \n")
+    print(farbig("4. Exit           ", 31) + " \n---Spiel schließen\n")
 
 
 
     mode = 0
 
-    while mode != 1 and mode != 2 and mode != 3:
+    while mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
         try:
-            mode = int(input("Zahl eingeben (1-3):"))
+            mode = int(input("Zahl eingeben (1-4):"))
         except:
             mode = 0
         
-        if mode != 1 and mode != 2 and mode != 3:
+        if mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
             print("Ungültige Eingabe!")
             
     if mode == 1:
         clear_terminal()
         game_tic_tac_toe_1v1()
+
     
-
-
     if mode == 3:
+        clear_terminal()
+        tic_tac_toe_2.main_tic_tac_toe_2()
+
+
+    if mode == 4:
         clear_terminal()
         return
 

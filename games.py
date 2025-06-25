@@ -1,4 +1,4 @@
-last_update = "23.06.2025"
+last_update = "24.06.2025"
 
 import battleship
 import tic_tac_toe
@@ -35,7 +35,7 @@ def games_start():
     print("Willkommen zu einer erlesenen Auswahl an Klassikern!\n\n" \
     "- Alle Spiele laufen ohne Installation zusätzlicher Bibliotheken.\n" \
     "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n" \
-    "- Bitte nicht" + "!@#*()_+{ }|$%^&: <> ? [ ] \;', ./" +" eingeben!\n\n" \
+    "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \;', ./" +" genau so eingeben!\n\n" \
     "Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1. ", 32) + "Schiffe_Versenken\n")
     print(farbig("- 2. ", 32) + "Galgenmännchen\n")
@@ -52,6 +52,8 @@ def games_start():
 
         if game == secret:
             animation_why.anim_1()
+            clear_terminal()
+            games_start()
 
         try:
             game = int(game)
@@ -80,7 +82,7 @@ def games_start():
         print(farbig("\n" +"Exit", 31) + "\n")
         return "Exit"
     
-0
+
 #Game start:
 
 g = "notExit"

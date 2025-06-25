@@ -15,3 +15,7 @@ Make sure you have **Python** installed. Then, launch the main menu from your te
 
 ```bash
 python3 games.py
+```
+##
+
+![python-blyat](images/python-blyat.png)
