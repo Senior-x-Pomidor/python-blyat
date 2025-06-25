@@ -13,17 +13,55 @@ def calc_digits(field):
     except:
         return 1
 
+
+def calc_score():
+    score = 0
+    for row in board:
+        for field in row:
+            if field != ' ':
+                score += int(field)
+
+    return score
+
+
 def clear_terminal():
     print("\033[H\033[J", end="")
 
+
 def print_board():
-    clear_terminal()
+    print('_' * (field_size + 2) * board_size)
     for row in board:
         for field in row:
             digits = calc_digits(field)
             print(f'[{' ' * (field_size - digits)}{field}]', end='')
         print()
+    print('‾' * (field_size + 2) * board_size)
 
+
+def print_turn():
+    clear_terminal()
+
+    print("""_______________      _____   ______  
+\_____  \   _  \    /  |  | /  __  \ 
+ /  ____/  /_\  \  /   |  |_>      < 
+/       \  \_/   \/    ^   /   --   \\
+\_______ \_____  /\____   |\______  /
+        \/     \/      |__|       \/
+""")
+    print('            by Boris - 24.06.2025')
+    print()
+    print()
+    print('current score: ', calc_score())
+    
+    
+    print_board()
+
+    print()
+    print()
+    print('w, a, s, d and enter to move')
+    print('q to quit')
+    print()
+    print()
 
 def add_random_tile():
     new_tile = 2
@@ -110,12 +148,12 @@ def play_move(direction):
         return
     
     add_random_tile()
-    print_board()
+    print_turn()
 
 
-def start_game():
+def start():
     add_random_tile()
-    print_board()
+    print_turn()
 
     while True:
         i = input()
@@ -131,4 +169,6 @@ def start_game():
 
     print('game over')
 
-start_game()
+
+if __name__ == '__main__':
+    start()
