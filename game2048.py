@@ -13,7 +13,11 @@ def calc_digits(field):
     except:
         return 1
 
+def clear_terminal():
+    print("\033[H\033[J", end="")
+
 def print_board():
+    clear_terminal()
     for row in board:
         for field in row:
             digits = calc_digits(field)
@@ -126,6 +130,5 @@ def start_game():
         play_move(i)
 
     print('game over')
-
 
 start_game()
