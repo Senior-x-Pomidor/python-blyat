@@ -1,4 +1,4 @@
-last_update = "24.06.2025"
+last_update = "26.06.2025"
 
 import battleship
 import tic_tac_toe
@@ -43,7 +43,7 @@ def games_start():
     print(farbig("- 3.    ", 32) + "Tic-Tac-Toe\n")
     print(farbig("- 2048. ", 32) + "2048\n")
     print()
-    print("Nummer des Spiels auswählen (Zahl von"+ farbig(" 1-3", 32) +") oder"+ farbig(" Exit ", 31) + "eintippen zum beenden:")
+    print("Nummer des Spiels eingeben (Zahl von"+ farbig(" 1-2048", 32) +") oder"+ farbig(" Exit ", 31) + "eintippen zum beenden:")
 
     game = 0
 
@@ -96,10 +96,6 @@ g = "notExit"
 while g != "Exit":
 
     g = games_start()
-
-
-
-
 
 
 

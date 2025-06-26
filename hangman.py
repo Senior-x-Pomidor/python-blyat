@@ -1,7 +1,8 @@
-last_update = "24.06.2025"
+last_update = "26.06.2025"
 
 import random
 import urllib.request
+import vigenere
 
 hangman_pictures =['''
           
@@ -287,6 +288,11 @@ def word_input():
 
     print("Jetzt das geheimsnissvolle Wort eingeben:\n")
     word = str(input())
+
+    if len(word)>0 and word[0] == "#":
+
+        word = vigenere.decrypt(word)
+
     global letter_ls
     letter_ls = [] 
 
@@ -404,22 +410,21 @@ def game_pick_mode_hangman():
     big_text("hangman")
 
     print("Bitte Spielmodus auswählen:\n ")
-    print(farbig("1. 1 v many  ", 32) + " mind. 2 Spieler\n---Einer gibt ein, die anderen raten!\n")
+    print(farbig("1. 1 v many  ", 32) + " mind. 2 Spieler\n---Einer gibt ein, die anderen raten! (oder Chiffre-Wort eingeben)\n")
     print(farbig("2. Computer  ", 32) + " mind. 1 Spieler\n---Gegen den Computer Spielen\n")  
-    print(farbig("3. Exit      ", 31) + " \n---Spiel schließen\n")
-
-
+    print(farbig("3. Vigenère  ", 32) + "                \n---Vigenère-Chiffre erstellen\n")  
+    print(farbig("4. Exit      ", 31) + " \n---Spiel schließen\n")
 
     mode = 0
 
-    while mode != 1 and mode != 2 and mode != 3:
+    while mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
         try:
-            mode = int(input("Zahl eingeben (1-3):"))
+            mode = int(input("Zahl eingeben (1-4):"))
         except:
             mode = 0
         
-        if mode != 1 and mode != 2 and mode != 3:
+        if mode != 1 and mode != 2 and mode != 3 and mode != 4:
 
             print("Ungültige Eingabe!")
             
@@ -430,8 +435,12 @@ def game_pick_mode_hangman():
     if mode == 2:
         clear_terminal()
         game_hanman_computer_offline_online()
-
+    
     if mode == 3:
+        clear_terminal()
+        vigenere.create_chiffre()
+        
+    if mode == 4:
         clear_terminal()
         return
     
