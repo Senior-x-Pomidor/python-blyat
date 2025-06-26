@@ -55,14 +55,15 @@ def decrypt(encrypt_word):
     word_decrypt = "".join(decrypt_word_ls)
     return word_decrypt
 
-def create_chiffre():
+def create_chiffre_hangman():
     hangman.clear_terminal()
     hangman.big_text("hangman")
     print("Jetzt zu verschlüsselndes Wort eingeben:\n")
-    word = str(input())
+    word = str(input()).lower()
     hangman.clear_terminal()
     hangman.big_text("hangman")
     print("Das verschlüsselte Wort lautet:\n")
-    print("Kopiere es und schicke es jmd. zum erraten:\n")
+    print("Kopiere es und schicke es jmd. zum erraten, # umbedingt mitkopieren!\n")
     print(encrypt(word))
     input("Enter...")
+

@@ -438,7 +438,7 @@ def game_pick_mode_hangman():
     
     if mode == 3:
         clear_terminal()
-        vigenere.create_chiffre()
+        vigenere.create_chiffre_hangman()
         
     if mode == 4:
         clear_terminal()
