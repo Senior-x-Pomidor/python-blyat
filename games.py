@@ -35,6 +35,7 @@ def games_start():
 
     print("Willkommen zu einer erlesenen Auswahl an Klassikern!\n\n" \
     "- Alle Spiele laufen ohne Installation zusätzlicher Bibliotheken.\n" \
+    "- Für beste Darstellung Terminal auf ganzem Bildschirm anzeigen.\n" \
     "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n" \
     "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \;', ./" +" genau so eingeben!\n\n" \
     "Derzeit verfügbare Spiele sind:\n\n")
