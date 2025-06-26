@@ -26,8 +26,12 @@ player ="o"
 def create_field():
 
     global field 
-
+    global height
+    global width
     field = []
+
+    height = 3
+    width  = 3
 
     for row in range(3):
         field.append([])
