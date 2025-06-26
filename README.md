@@ -6,7 +6,8 @@
 
 - 🚢 **Battleship** – A turn-based naval guessing game  
 - 🪢 **Hangman** – The classic word-guessing challenge  
-- 🎯 **Tic Tac Toe** – A strategic 2-player grid game  
+- 🎯 **Tic Tac Toe** – A strategic 2-player grid game
+- 🔢 **2048** – The popular number puzzle
 
 
 ## 🚀 How to Start

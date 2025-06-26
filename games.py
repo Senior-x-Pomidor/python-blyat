@@ -4,6 +4,7 @@ import battleship
 import tic_tac_toe
 import hangman
 import animation_why
+import game2048
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -39,12 +40,14 @@ def games_start():
     "Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1. ", 32) + "Schiffe_Versenken\n")
     print(farbig("- 2. ", 32) + "Galgenmännchen\n")
-    print(farbig("- 3. " , 32) + "Tic-Tac-Toe\n\n")
+    print(farbig("- 3. " , 32) + "Tic-Tac-Toe\n")
+    print(farbig("- 2048. ", 32) + "2048\n")
+    print()
     print("Nummer des Spiels auswählen (Zahl von"+ farbig(" 1-3", 32) +") oder"+ farbig(" Exit ", 31) + "eintippen zum beenden:")
 
     game = 0
 
-    while game != 1 and game != 2 and game != 3 and game != "Exit":
+    while game != 1 and game != 2 and game != 3 and game != 2048 and game != "Exit":
 
         game = input("Eingabe:")
 
@@ -60,7 +63,7 @@ def games_start():
         except:
             game = game
         
-        if game != 1 and game != 2 and game != 3 and game != "Exit":
+        if game != 1 and game != 2 and game != 3 and game != 2048 and game != "Exit":
 
             print("Ungültige Eingabe!")
             
@@ -76,6 +79,9 @@ def games_start():
         clear_terminal()
         tic_tac_toe.game_pick_mode_tic_tac_toe()
 
+    if game == 2048:
+        print('starting')
+        game2048.start()
 
     if game == "Exit":
         clear_terminal()
