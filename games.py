@@ -24,7 +24,8 @@ def big_text(text):
         print("\033[1;34m\____/ \__,_//_/ /_/ /_/ \___//____/  \033[0m")
         print("\033[1;34m                                      \033[0m")
         print("by dani (Senior-x-Pomidor) "+last_update)
-        print(" \n \n \n \n \n")
+        print("contributed by: boris (BorisG0)")
+        print("  \n \n \n \n")
 
 def games_start():
 
