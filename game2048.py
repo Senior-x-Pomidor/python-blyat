@@ -33,7 +33,7 @@ def print_board():
     for row in board:
         for field in row:
             digits = calc_digits(field)
-            print(f'[{' ' * (field_size - digits)}{field}]', end='')
+            print(f"[{' ' * (field_size - digits)}{field}]", end='')
         print()
     print('‾' * (field_size + 2) * board_size)
 
