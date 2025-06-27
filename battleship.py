@@ -1,4 +1,4 @@
-last_update = "22.06.2025"
+last_update = "27.06.2025"
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -83,7 +83,7 @@ def field_place_out():
     print(" "*1,"-"*41)
 
 def j_cord_pick():
-    j_coord = input("Bitte Buchstaben eingeben:")
+    j_coord = input("Bitte Buchstaben eingeben:").upper()
     if j_coord in letter_list:
         letter_list.index
         return letter_list.index(j_coord)
@@ -173,7 +173,7 @@ def place_ship():
     #Richung Hori oder Vert
 
 
-    direction = input("Ausrichtung eingeben (H für Horizontal, V für Vertikal):")
+    direction = input("Ausrichtung eingeben (H für Horizontal, V für Vertikal):").upper()
 
     if direction == "H":
         coords = [(i, j + n) for n in range(l)]

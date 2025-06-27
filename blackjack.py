@@ -81,8 +81,8 @@ def generate_cards_list():
                 card = farbig(card, "1;31")
                 suit_list[suit] = farbig(suit_list[suit], "1;31")
             else:
-                card = farbig(card, "1;30")
-                suit_list[suit] = farbig(suit_list[suit], "1;30")
+                card = farbig(card, "1;37")#37--> to make black
+                suit_list[suit] = farbig(suit_list[suit], "1;37")#37--> to make black
             
             cards_list[suit].append((card, suit_list[suit]))
 
