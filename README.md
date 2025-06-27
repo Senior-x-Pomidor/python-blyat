@@ -7,7 +7,7 @@
 - 🚢 **Battleship** – A turn-based naval guessing game  
 - 🪢 **Hangman** – The classic word-guessing challenge  
 - 🎯 **Tic Tac Toe** – A strategic 2-player grid game
-- 🃏 **Blackjack** – A fast-paced 21-card showdown
+- 🃏 **Blackjack** – A fast-paced card showdown
 - 🔢 **2048** – The popular number puzzle
 
 
