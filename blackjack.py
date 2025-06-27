@@ -22,6 +22,26 @@ def big_text(text):
         print("by dani (Senior-x-Pomidor) "+last_update)
         print(" \n \n \n \n \n")
 ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+
+warning_txt = warning_text = """
+\033[1;31mGlücksspiel kann süchtig machen.\033[0m
+Bitte spielen Sie verantwortungsbewusst und nur mit Geld, das Sie entbehren können.
+Achten Sie auf Ihre Spielzeiten und Gewohnheiten – setzen Sie sich im Zweifel ein Limit.
+Sollten Sie erste Anzeichen von problematischem Spielverhalten bei sich oder Angehörigen bemerken
+(z.B. Kontrollverlust, zunehmende finanzielle Sorgen, soziale Isolation),
+wenden Sie sich frühzeitig an professionelle Unterstützung:
+
+– Bundeszentrale für gesundheitliche Aufklärung (BZgA)
+  Telefon: 0800 1 372 700 (kostenfrei, vertraulich)
+  https://www.bzga.de
+
+– TelefonSeelsorge
+  Telefon: 0800 111 0 111 oder 0800 111 0 222 (kostenfrei, rund um die Uhr)
+  https://www.telefonseelsorge.de
+
+Hilfe zu suchen ist kein Zeichen von Schwäche, sondern ein wichtiger Schritt,
+um Ihre Lebensqualität zu schützen.
+"""
 #######################################################################
 
 turn = 1 
@@ -317,6 +337,11 @@ def main_blackjack_classic():
 
 
 def blackjack_loop():
+
+    big_text("blackjack")
+    print(warning_text)
+    input("\nEnter...")
+
     while True:
         main_blackjack_classic()
         while True:
