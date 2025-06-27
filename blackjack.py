@@ -44,7 +44,6 @@ um Ihre Lebensqualität zu schützen.
 """
 #######################################################################
 
-turn = 1 
 
 covered_card = f"""\
 ┌─────────┐
@@ -268,6 +267,8 @@ def display_game():
 def main_blackjack_classic():
 
     global hand_dealer, hand_player_1, hand_player_2, deck_of_cards
+    global turn
+    turn = 1 
     hand_dealer = []
     hand_player_1 = []
     hand_player_2 = []
@@ -304,7 +305,6 @@ def main_blackjack_classic():
         print("Du hast gegen den Dealer verloren!")
         return
     if count_best_hand("player_1") <= 21:
-        global turn
         turn = 2 
         while count_best_hand("dealer") < 17:
             display_game()
