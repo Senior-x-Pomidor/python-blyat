@@ -14,6 +14,7 @@ def big_text(text):
     money = str(googol.display_money_value())
 
 
+
     if text == "blackjack":
         print("\033[1;31m    ____  __           __     _            __  \033[0m")
         print("\033[1;31m   / __ )/ /___ ______/ /__  (_)___ ______/ /__\033[0m")
@@ -135,6 +136,9 @@ def update_hand(person):
     
     choice = input("Wie entscheidest du dich?\n" \
     "Hit = H, Stand = S\n").lower()
+
+
+
     if choice == "h":
         
 
@@ -275,7 +279,7 @@ def update_bet():
         try:
             bet_input = input("Wetteinsatz Eingeben:")
             if bet_input.strip() == "":
-                bet = 25
+                bet = 25 # Default bet value
                 break
             bet = int(bet_input)
             break
@@ -284,6 +288,9 @@ def update_bet():
     return bet
 
 def update_money_value():
+    global bet
+    if blackjack_player ==True:
+        bet = round(bet*1.5)
 
     googol.update_value_file(result, bet)
     
@@ -292,85 +299,97 @@ def update_money_value():
 def main_blackjack_classic():
 
     global hand_dealer, hand_player_1, hand_player_2, deck_of_cards
-    global turn
-    global result
-    turn = 1 
+    global turn, result, blackjack_player, bet
+    turn = 1
+    result = ""
     hand_dealer = []
     hand_player_1 = []
     hand_player_2 = []
     deck_of_cards = []
-
+    blackjack_player = False
+    blackjack_dealer = False
     generate_cards_list()
     generate_deck_of_cards()
     generate_hand("dealer")
     generate_hand("player_1")
     display_game()
 
-    i = 2
+    if count_best_hand("player_1") == 21 and len(hand_player_1) == 2:
+        blackjack_player = True
+    if count_best_hand("dealer") == 21 and len(hand_dealer) == 2:
+        blackjack_dealer = True
+
+    if blackjack_player and blackjack_dealer:
+        display_game()
+        print("Beide haben Blackjack! Unentschieden!")
+        input("Enter...")
+        return
+    elif blackjack_player:
+        result = "+"
+        update_money_value()
+        display_game()
+        print("Blackjack! Du gewinnst!")
+        input("Enter...")
+        return
+    elif blackjack_dealer:
+        result = "-"
+        update_money_value()
+        display_game()
+        print("Dealer hat Blackjack! Du verlierst!")
+        input("Enter...")
+        return
+
+    # Player's turn
     choice = ""
     while choice != "s":
-        i += 1   
         display_game()
         if count_best_hand("player_1") == 21:
-            display_game()
-            print("Blackjack!")
-            input("Enter...")
+            print("21!")
             break
         choice = update_hand("player_1")
-        if count_best_hand("player_1")  > 21:
+        if count_best_hand("player_1") > 21:
             result = "-"
             update_money_value()
             display_game()
-            print("Bust")
+            print("Bust! Du hast verloren!")
             input("Enter...")
-            break
-        if choice == "s":
-            break
+            return
 
+    # Dealer's turn (only if player didn't bust)
+    turn = 2
+    while count_best_hand("dealer") < 17:
+        display_game()
+        update_hand("dealer")
 
-    if count_best_hand("player_1") > 21:
+    # Final comparison
+    dealer_score = count_best_hand("dealer")
+    player_score = count_best_hand("player_1")
+    
+    display_game()
+    
+    if dealer_score > 21:
+        result = "+"
+        update_money_value()
+        display_game()
+        print("Dealer bust! Du gewinnst!")
+    elif dealer_score > player_score:
         result = "-"
         update_money_value()
         display_game()
-        print("Du hast gegen den Dealer verloren!")
-        return
-    if count_best_hand("player_1") <= 21:
-        turn = 2 
-        while count_best_hand("dealer") < 17:
-            display_game()
-            update_hand("dealer")
-            display_game()
-
-        dealer_score = count_best_hand("dealer")
-        player_score = count_best_hand("player_1")
-
-        if dealer_score > 21:
-            display_game()
-            result = "+"
-            update_money_value()
-            print("Dealer bust! Du hast gegen den Dealer gewonnen!")
-        elif dealer_score > player_score:
-            result = "-"
-            update_money_value()
-            display_game()
-            print("Du hast gegen den Dealer verloren!")
-        elif dealer_score < player_score:
-            result = "+"
-            update_money_value()
-            display_game()
-            print("Du hast gegen den Dealer gewonnen!")
-        else:
-            display_game()
-            print("Unglaublich! Ein Unentschieden!")
-
-        input("Enter...")
-
+        print("Dealer gewinnt!")
+    elif player_score > dealer_score:
+        result = "+"
+        update_money_value()
+        display_game()
+        print("Du gewinnst!")
     else:
-        result = "-"
-        update_money_value()
         display_game()
-        print("Du hast gegen den Dealer verloren!")
-        input("Enter...")
+        result = ""  # Tie, no money change
+        print("Unentschieden!")
+    
+        
+    
+    input("Enter...")
 
 
 def blackjack_loop():
