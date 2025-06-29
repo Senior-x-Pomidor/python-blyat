@@ -290,7 +290,7 @@ def update_bet():
 def update_money_value():
     global bet
     if blackjack_player ==True:
-        bet = round(bet*1.5)
+        bet = round(bet*1.2)
 
     googol.update_value_file(result, bet)
     
