@@ -2,7 +2,7 @@
 
 *A delightful collection of handpicked terminal games made with Python.*
 
-## 🎮 Games Collection
+## 🎮 Game Collection
 
 **python-blyat** is a curated selection of classic games, all connected through a simple, user-friendly terminal menu. The collection includes:
 
