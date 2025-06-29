@@ -73,4 +73,5 @@ def run_simulation(rounds=100):
 
 
 if __name__ == "__main__":
-    run_simulation(1000000)
+    x = int(input("Wie viel runs?:"))
+    run_simulation(x)
