@@ -1,4 +1,4 @@
-last_update = "27.06.2025"
+last_update = "29.06.2025"
 
 from games_and_tools import battleship
 from games_and_tools import tic_tac_toe
@@ -7,6 +7,7 @@ from games_and_tools import animation_why
 from games_and_tools import game2048
 from games_and_tools import blackjack
 from games_and_tools import googol
+from games_and_tools import bank
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -41,8 +42,11 @@ def games_start():
     "- Alle Spiele laufen ohne Installation zusätzlicher Bibliotheken.\n" \
     "- Für beste Darstellung Terminal auf ganzem Bildschirm anzeigen.\n" \
     "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n" \
-    "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \\;', ./" +" genau so eingeben!\n\n" \
-    "Derzeit verfügbare Spiele sind:\n\n")
+    "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \\;', ./" +" genau so eingeben!\n\n")
+
+    print(farbig("- 0.    ", 32) + "Sparkasse\n")
+    
+    print("Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1.    ", 32) + "Schiffe_Versenken\n")
     print(farbig("- 2.    ", 32) + "Galgenmännchen\n")
     print(farbig("- 3.    ", 32) + "Tic-Tac-Toe\n")
@@ -51,9 +55,9 @@ def games_start():
     print()
     print("Nummer des Spiels eingeben (Zahl von"+ farbig(" 1-2048", 32) +") oder"+ farbig(" Exit ", 31) + "eintippen zum beenden:")
 
-    game = 0
+    game = -1
 
-    while game != 1 and game != 2 and game != 3 and game != 4 and game != 2048 and game != "Exit":
+    while game != 0 and game != 1 and game != 2 and game != 3 and game != 4 and game != 2048 and game != "Exit" :
 
         game = input("Eingabe:")
 
@@ -69,9 +73,14 @@ def games_start():
         except:
             game = game
         
-        if game != 1 and game != 2 and game != 3 and game != 4 and game != 2048 and game != "Exit":
+        if game != 0 and game != 1 and game != 2 and game != 3 and game != 4 and game != 2048 and game != "Exit":
 
             print("Ungültige Eingabe!")
+
+
+    if game == 0:
+        clear_terminal()
+        bank.bank_main()
             
     if game == 1:
         clear_terminal()

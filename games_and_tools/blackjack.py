@@ -1,6 +1,7 @@
 import random
 import re
 import time
+from games_and_tools import googol
 
 last_update = "27.06.2025"
 
@@ -10,6 +11,7 @@ def clear_terminal():
 def farbig(text, farbcode):
     return f"\033[{farbcode}m{text}\033[0m"
 def big_text(text):
+    money = str(googol.display_money_value())
 
 
     if text == "blackjack":
@@ -20,6 +22,7 @@ def big_text(text):
         print("\033[1;34m/_____/_/\\__,_/\\___/_/|_|_/ /\\__,_/\\___/_/|_|  \033[0m")
         print("\033[1;34m                       /___/                   \033[0m")
         print("by dani (Senior-x-Pomidor) "+last_update)
+        print("Kontostand: "+money)
         print(" \n \n \n \n \n")
 ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
 
@@ -261,6 +264,28 @@ def display_game():
     print()
 #    print("Spieler 2:")
 #    display_hand(len(hand_player_2), "player_2")
+
+def update_bet():
+    global bet
+    clear_terminal()
+    big_text("blackjack")
+    print("Standard Wetteinsatz: 25€")
+    print("Zum ändern eingeben sondst Enter drücken")
+    while True:
+        try:
+            bet_input = input("Wetteinsatz Eingeben:")
+            if bet_input.strip() == "":
+                bet = 25
+                break
+            bet = int(bet_input)
+            break
+        except ValueError:
+            print("Bitte eine gültige ganze Zahl eingeben!")
+    return bet
+
+def update_money_value():
+
+    googol.update_value_file(result, bet)
     
 #######################################################################
 
@@ -268,6 +293,7 @@ def main_blackjack_classic():
 
     global hand_dealer, hand_player_1, hand_player_2, deck_of_cards
     global turn
+    global result
     turn = 1 
     hand_dealer = []
     hand_player_1 = []
@@ -292,6 +318,8 @@ def main_blackjack_classic():
             break
         choice = update_hand("player_1")
         if count_best_hand("player_1")  > 21:
+            result = "-"
+            update_money_value()
             display_game()
             print("Bust")
             input("Enter...")
@@ -301,6 +329,8 @@ def main_blackjack_classic():
 
 
     if count_best_hand("player_1") > 21:
+        result = "-"
+        update_money_value()
         display_game()
         print("Du hast gegen den Dealer verloren!")
         return
@@ -316,11 +346,17 @@ def main_blackjack_classic():
 
         if dealer_score > 21:
             display_game()
+            result = "+"
+            update_money_value()
             print("Dealer bust! Du hast gegen den Dealer gewonnen!")
         elif dealer_score > player_score:
+            result = "-"
+            update_money_value()
             display_game()
             print("Du hast gegen den Dealer verloren!")
         elif dealer_score < player_score:
+            result = "+"
+            update_money_value()
             display_game()
             print("Du hast gegen den Dealer gewonnen!")
         else:
@@ -330,25 +366,32 @@ def main_blackjack_classic():
         input("Enter...")
 
     else:
-
+        result = "-"
+        update_money_value()
         display_game()
         print("Du hast gegen den Dealer verloren!")
         input("Enter...")
 
 
 def blackjack_loop():
-
+    global bet
     big_text("blackjack")
     print(warning_text)
     input("\nEnter...")
+    update_bet()
 
     while True:
         main_blackjack_classic()
+        again = ""
         while True:
-            again = input("Nochmal spielen? (j/n):\n ").strip().lower()
+            if again == "w":
+                update_bet()
+                again = "j"
             if again in ("j", "n"):
                 break
-            print("Ungültige Eingabe!")
+            again = input("Nochmal spielen? (j/n, w für Wetteinsatz ändern):\n ").strip().lower()
+            if again not in ("j", "n", "w"):
+                print("Ungültige Eingabe!")
         if again != "j":
             break
     return
