@@ -6,6 +6,7 @@ import hangman
 import animation_why
 import game2048
 import blackjack
+import googol
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -18,11 +19,12 @@ def big_text(text):
 
 
     if text == "games":
+
         print("\033[1;31m   ______                             \033[0m")
         print("\033[1;31m  / ____/____ _ ____ ___   ___   _____\033[0m")
-        print("\033[1;33m / / __ / __ `// __ `__ \ / _ \ / ___/\033[0m")
+        print("\033[1;33m / / __ / __ `// __ `__ \\ / _ \\ / ___/\033[0m")
         print("\033[1;32m/ /_/ // /_/ // / / / / //  __/(__  ) \033[0m")
-        print("\033[1;34m\____/ \__,_//_/ /_/ /_/ \___//____/  \033[0m")
+        print("\033[1;34m\\____/ \\__,_//_/ /_/ /_/ \\___//____/  \033[0m")
         print("\033[1;34m                                      \033[0m")
         print("by dani (Senior-x-Pomidor) "+last_update)
         print("contributed by: boris (BorisG0)")
