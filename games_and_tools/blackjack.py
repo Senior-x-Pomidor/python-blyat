@@ -256,6 +256,24 @@ def count_best_hand(person):
 
     return total
 
+def is_soft_17():
+    hand = hand_dealer
+    total = count_best_hand("dealer")
+    cleaned = [extract_card_value(s) for s in hand]
+    coerced = []
+    for x in cleaned:
+        try:
+            coerced.append(int(x))
+        except ValueError:
+            coerced.append(x)
+    ace_count = sum(1 for x in coerced if x == "A")
+    if total == 17 and ace_count > 0:
+        value_no_A = sum(x for x in coerced if isinstance(x, int))
+        if value_no_A + 11 + (ace_count-1) <= 21:
+            return True
+    return False
+
+
 def display_game():
 
     clear_terminal()
@@ -336,9 +354,9 @@ def main_blackjack_classic():
 
     # Player's turn
     choice = ""
-    while choice != "s":
+    while choice != "s" and blackjack_player != True:
         display_game()
-        if count_best_hand("player_1") == 21 and blackjack_player != True:
+        if count_best_hand("player_1") == 21:
             print("21!")
             input("Enter...")
             break
@@ -353,7 +371,7 @@ def main_blackjack_classic():
 
     # Dealer's turn (only if player didn't bust)
     turn = 2
-    while count_best_hand("dealer") < 17:
+    while count_best_hand("dealer") < 17 or is_soft_17():
         display_game()
         update_hand("dealer")
 
