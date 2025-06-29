@@ -1,4 +1,4 @@
-import hangman
+from games_and_tools import hangman
 
 crypt_key  = "pfandflaschenrueckgabegeraet"
 

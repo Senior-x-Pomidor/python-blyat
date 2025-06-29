@@ -2,7 +2,7 @@ last_update = "27.06.2025"
 
 import random
 import urllib.request
-import vigenere
+from games_and_tools import vigenere
 
 hangman_pictures =['''
           

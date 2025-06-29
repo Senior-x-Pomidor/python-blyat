@@ -1,12 +1,12 @@
 last_update = "27.06.2025"
 
-import battleship
-import tic_tac_toe
-import hangman
-import animation_why
-import game2048
-import blackjack
-import googol
+from games_and_tools import battleship
+from games_and_tools import tic_tac_toe
+from games_and_tools import hangman
+from games_and_tools import animation_why
+from games_and_tools import game2048
+from games_and_tools import blackjack
+from games_and_tools import googol
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende

@@ -1,6 +1,6 @@
 last_update = "24.06.2025"
 
-import tic_tac_toe_2
+from games_and_tools import tic_tac_toe_2
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
