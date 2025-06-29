@@ -3,7 +3,7 @@ import re
 import time
 from games_and_tools import googol
 
-last_update = "27.06.2025"
+last_update = "29.06.2025"
 
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
@@ -23,7 +23,7 @@ def big_text(text):
         print("\033[1;34m/_____/_/\\__,_/\\___/_/|_|_/ /\\__,_/\\___/_/|_|  \033[0m")
         print("\033[1;34m                       /___/                   \033[0m")
         print("by dani (Senior-x-Pomidor) "+last_update)
-        print("Kontostand: "+money)
+        print("Kontostand: "+money+"€")
         print(" \n \n \n \n \n")
 ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
 
@@ -269,19 +269,26 @@ def display_game():
 #    print("Spieler 2:")
 #    display_hand(len(hand_player_2), "player_2")
 
+def no_money():
+    print("Zu wenig auf dem Konto für diesen Wetteinsatz!")
+    input("Enter...")
+    update_bet()
+
 def update_bet():
     global bet
     clear_terminal()
     big_text("blackjack")
-    print("Standard Wetteinsatz: 25€")
-    print("Zum ändern eingeben sondst Enter drücken")
+    print("Standard Wetteinsatz: 100€")
+    print("Zum ändern eingeben, sondst Enter drücken")
     while True:
         try:
             bet_input = input("Wetteinsatz Eingeben:")
             if bet_input.strip() == "":
-                bet = 25 # Default bet value
+                bet = 100 # Default bet value
                 break
             bet = int(bet_input)
+            if bet > int(googol.display_money_value()):
+                no_money()
             break
         except ValueError:
             print("Bitte eine gültige ganze Zahl eingeben!")
@@ -313,38 +320,27 @@ def main_blackjack_classic():
     generate_hand("dealer")
     generate_hand("player_1")
     display_game()
+    draw = False
 
     if count_best_hand("player_1") == 21 and len(hand_player_1) == 2:
         blackjack_player = True
     if count_best_hand("dealer") == 21 and len(hand_dealer) == 2:
         blackjack_dealer = True
-
     if blackjack_player and blackjack_dealer:
-        display_game()
-        print("Beide haben Blackjack! Unentschieden!")
-        input("Enter...")
-        return
-    elif blackjack_player:
-        result = "+"
-        update_money_value()
-        display_game()
-        print("Blackjack! Du gewinnst!")
-        input("Enter...")
-        return
-    elif blackjack_dealer:
-        result = "-"
-        update_money_value()
-        display_game()
-        print("Dealer hat Blackjack! Du verlierst!")
-        input("Enter...")
-        return
+        draw = True
+    if blackjack_player:
+        print("Blackjack!")
+        input("Enter...")   
+    
+
 
     # Player's turn
     choice = ""
     while choice != "s":
         display_game()
-        if count_best_hand("player_1") == 21:
+        if count_best_hand("player_1") == 21 and blackjack_player != True:
             print("21!")
+            input("Enter...")
             break
         choice = update_hand("player_1")
         if count_best_hand("player_1") > 21:
@@ -382,12 +378,25 @@ def main_blackjack_classic():
         update_money_value()
         display_game()
         print("Du gewinnst!")
+    elif player_score == dealer_score and blackjack_dealer ==True:
+        result = "-"
+        update_money_value()
+        display_game()
+        print("Dealer gewinnt!")
+    elif player_score == dealer_score and blackjack_player ==True:
+        result = "+"
+        update_money_value()
+        display_game()
+        print("Du gewinnst!")
+    elif draw == True:
+        display_game()
+        print("Beide haben Blackjack! Unentschieden!")
+        input("Enter...")
     else:
         display_game()
         result = ""  # Tie, no money change
         print("Unentschieden!")
     
-        
     
     input("Enter...")
 
@@ -400,6 +409,8 @@ def blackjack_loop():
     update_bet()
 
     while True:
+        if bet > int(googol.display_money_value()):
+            no_money()
         main_blackjack_classic()
         again = ""
         while True:

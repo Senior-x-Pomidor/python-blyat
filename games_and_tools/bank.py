@@ -15,9 +15,9 @@ def big_text(text):
         print("\033[1;31m ___/ / /_/ / /_/ / /  / ,< / /_/ (__  |__  )  __/\033[0m")
         print("\033[1;31m/____/ .___/\__,_/_/  /_/|_|\__,_/____/____/\___/ \033[0m")
         print("\033[1;31m    /_/                                           \033[0m")
-        print("Kontoauszug vom: "+str(datetime.today().replace(microsecond=0)))
+        print("Kontoauszug vom: "+str(datetime.today().replace(microsecond=0))+"\n")
         print("Sparkasse wird gerade renoviert, es sind nicht alle Funktionen verfügbar")
-        print(" \n \n \n \n")
+        print(" \n \n \n")
 def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
     print("\033[H\033[J", end="")
@@ -26,10 +26,18 @@ def farbig(text, farbcode):
 
 ##########################################################
 
+
+
+
+
+
+##########################################################
 def bank_main():
 
     big_text("sparkasse")
-    print("Kontostand: "+googol.display_money_value()+"€\n")
+    print("\033[1;31m---------------------------------------------------------------------\033[0m")
+    print("Kontostand: "+googol.display_money_value()+"€")
+    print("\033[1;31m---------------------------------------------------------------------\033[0m")
     input("Enter drücken zum Verlassen der Bank...")
     return
 
