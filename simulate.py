@@ -3,12 +3,16 @@ import time
 from unittest.mock import patch
 from games_and_tools import blackjack, googol
 
-
+def clear_terminal():
+    # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
+    print("\033[H\033[J", end="")
 def run_simulation(rounds=100):
     """Run blackjack simulation for a given number of rounds and report stats"""
     wins = losses = ties = 0
     total_change = 0
     for i in range(1, rounds + 1):
+        print(f"Runde {i} von {rounds}", end='\r')
+        clear_terminal()
         # set fixed bet
         blackjack.bet = 10
         # record money before
@@ -69,4 +73,4 @@ def run_simulation(rounds=100):
 
 
 if __name__ == "__main__":
-    run_simulation(50000)
+    run_simulation(1000000)
