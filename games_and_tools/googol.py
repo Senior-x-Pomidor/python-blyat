@@ -25,7 +25,7 @@ def find_value_file_path():
     path = os.path.join(money_value_path, "money_value.txt")
     if not os.path.isfile(path):
         with open(path, "w", encoding="utf-8") as f:
-            f.write("0")
+            f.write("5000")
     return path
 
 def update_value_file(operation, argument):
