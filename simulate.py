@@ -7,6 +7,7 @@ def clear_terminal():
     # \033[H setzt den Cursor oben links, \033[J löscht bis zum Ende
     print("\033[H\033[J", end="")
 def run_simulation(rounds=100):
+    start = time.time()
     """Run blackjack simulation for a given number of rounds and report stats"""
     wins = losses = ties = 0
     total_change = 0
@@ -62,7 +63,7 @@ def run_simulation(rounds=100):
     
     # calculate expected value
     expected_value = total_change / rounds
-    
+    duration = time.time() - start
     # print summary
     print(f"Simulation complete: {rounds} rounds")
     print(f"Wins: {wins}")
@@ -70,6 +71,7 @@ def run_simulation(rounds=100):
     print(f"Ties: {ties}")
     print(f"Erwartungswert: {expected_value:.4f}")
     print(f"Total Money Change: {total_change}")
+    print(f'duration: {duration}')
 
 
 if __name__ == "__main__":
