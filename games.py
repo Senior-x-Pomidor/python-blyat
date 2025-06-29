@@ -41,7 +41,7 @@ def games_start():
     "- Alle Spiele laufen ohne Installation zusätzlicher Bibliotheken.\n" \
     "- Für beste Darstellung Terminal auf ganzem Bildschirm anzeigen.\n" \
     "- Zum terminieren des Programms kann jederzeit Ctrl+C gedrückt werden.\n" \
-    "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \;', ./" +" genau so eingeben!\n\n" \
+    "- Bitte nicht " + "!@#*()_+{ }|$%^&: <> ? [ ] \\;', ./" +" genau so eingeben!\n\n" \
     "Derzeit verfügbare Spiele sind:\n\n")
     print(farbig("- 1.    ", 32) + "Schiffe_Versenken\n")
     print(farbig("- 2.    ", 32) + "Galgenmännchen\n")
