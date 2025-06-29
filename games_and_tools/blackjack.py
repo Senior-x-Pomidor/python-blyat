@@ -296,8 +296,9 @@ def update_bet():
     global bet
     clear_terminal()
     big_text("blackjack")
-    print("Standard Wetteinsatz: 100€")
-    print("Zum ändern eingeben, sondst Enter drücken")
+    print("-min. Wetteinsatz: 100€")
+    print("-Standard Wetteinsatz: 100€\n")
+    print("Zum ändern eingeben, sonst Enter drücken")
     while True:
         try:
             bet_input = input("Wetteinsatz Eingeben:")
@@ -305,6 +306,8 @@ def update_bet():
                 bet = 100 # Default bet value
                 break
             bet = int(bet_input)
+            if bet < 100:
+                update_bet()
             if bet > int(googol.display_money_value()):
                 no_money()
             break

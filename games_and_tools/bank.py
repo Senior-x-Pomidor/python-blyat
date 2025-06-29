@@ -35,9 +35,15 @@ def farbig(text, farbcode):
 def bank_main():
 
     big_text("sparkasse")
-    print("\033[1;31m---------------------------------------------------------------------\033[0m")
+    print("\033[1;31m------------------------------------------------------------------------------\033[0m")
     print("Kontostand: "+googol.display_money_value()+"€")
-    print("\033[1;31m---------------------------------------------------------------------\033[0m")
+    print("\033[1;31m------------------------------------------------------------------------------\033[0m")
+    print("Kein Geld?")
+    print("Melde dich beim Jobcenter oder Spiele einfach ein Spiel. Pro Sieg bekommst du:")
+    print("\033[1;31m------------------------------------------------------------------------------\033[0m")
+    print("-Hangman vs Computer(offline/online): 100€")
+    print("")
+    print("")
     input("Enter drücken zum Verlassen der Bank...")
     return
 
