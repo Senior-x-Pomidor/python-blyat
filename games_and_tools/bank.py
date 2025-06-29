@@ -39,7 +39,7 @@ def bank_main():
     print("Kontostand: "+googol.display_money_value()+"€")
     print("\033[1;31m------------------------------------------------------------------------------\033[0m")
     print("Kein Geld?")
-    print("Melde dich beim Jobcenter oder Spiele einfach ein Spiel. Pro Sieg bekommst du:")
+    print("Melde dich beim Jobcenter oder spiele einfach ein Spiel. Pro Sieg bekommst du:")
     print("\033[1;31m------------------------------------------------------------------------------\033[0m")
     print("-Hangman vs Computer(offline/online): 100€")
     print("")
