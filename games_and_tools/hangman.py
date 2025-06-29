@@ -3,6 +3,7 @@ last_update = "27.06.2025"
 import random
 import urllib.request
 from games_and_tools import vigenere
+from games_and_tools import googol
 
 hangman_pictures =['''
           
@@ -577,8 +578,10 @@ def game_hanman_computer_offline_online():
     print(hangman_pictures[pic_index])
     if "_" not in show:
         print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+        googol.update_value_file("+", 100)
     elif answer == True:
         print("Glückwunsch! Das Wort war:", "".join(letter_ls))
+        googol.update_value_file("+", 100)
     else:
         print("Leider verloren! Das Wort war:", "".join(letter_ls))
 
@@ -586,7 +589,6 @@ def game_hanman_computer_offline_online():
     wrong_letters_ls = []
     input("Enter drücken um fortzufahren:\n")
     game_pick_mode_hangman()
-
 
 
 if __name__ == "__main__":
