@@ -214,6 +214,10 @@ words_offline = [
     "Sinnfrage", "Fremdscham", "Selbstbewusstsein", "Bewusstseinszustand", "Zwangsvorstellung"
 ]
 
+words_offline_halfmeier = [
+    "Regelkreis", "Regelstrecke", "Regelgröße", "Führungsgröße", "Stellgröße", "Störgröße", "Regelabweichung", "Sollwert", "Istwert", "Stellglied", "Stellantrieb", "Sensor", "Messglied", "Rückführung", "Vergleichsstelle", "Regler", "P-Regler", "I-Regler", "D-Regler", "PI-Regler", "PD-Regler", "PID-Regler", "Totzeit", "Verzögerungsglied", "PT1-Glied", "PT2-Glied", "DT1-Glied", "Sprungantwort", "Impulsantwort", "Übertragungsfunktion", "Differentialgleichung", "Zustandsraumdarstellung", "Zustandsgröße", "Systemeingang", "Systemausgang", "Laplace-Transformation", "Inverse Laplace-Transformation", "s-Domain", "Frequenzgang", "Bode-Diagramm", "Amplitudengang", "Phasengang", "Phasenreserve", "Amplitudenreserve", "Nyquist-Kriterium", "Stabilität", "asymptotische Stabilität", "instabil", "Übergangsverhalten", "Einschwingverhalten", "Einschwingzeit", "Regelzeit", "Anschwingvorgang", "Regelgüte", "Überschwingen", "Dämpfung", "Dämpfungsgrad", "Systemordnung", "Zeitverhalten", "Führungsverhalten", "Störverhalten", "Linearität", "Nichtlinearität", "Zeitinvarianz", "Kausalität", "Übertragungsverhalten", "Regelstruktur", "Offener Regelkreis", "Geschlossener Regelkreis", "Vorsteuerung", "Kompensation", "Rückkopplung", "Pol", "Nullstelle", "Pol-Nullstellen-Diagramm", "Polynom", "Charakteristische Gleichung", "Wurzelortskurve", "Sprungfunktion", "Einheitssprung", "Heaviside-Funktion", "Dirac-Impuls", "Verstärkung", "Regelung", "Steuerung", "Regelstrategie", "Zustandsregler", "Beobachter", "Regelentwurf", "Optimierung", "Digitale Regelung", "Abtastung", "Abtastzeit", "Z-Transformation", "Diskrete Regelung", "FIR-Filter", "IIR-Filter", "Regelungstechnisches Modell"
+]
+
 letter_ls =[]
 wrong_letters_ls = [] 
 
@@ -394,12 +398,12 @@ def computer_hangman():
     print(farbig("3. Exit              ", 31) + " \n---Zurück\n")
 
     mode = 0
-    while mode not in (1, 2, 3):
+    while mode not in (1, 2, 3, 666):
         try:
             mode = int(input("Zahl eingeben (1-3):"))
         except:
             mode = 0
-        if mode not in (1, 2, 3):
+        if mode not in (1, 2, 3, 666):
             print("Ungültige Eingabe!")
     clear_terminal()
     return mode
@@ -455,7 +459,12 @@ def game_hangman_1_v_many():
         
 def pick_random_word():
 
-    random_word = random.choice(words_offline)
+    if zz == 666:
+
+        random_word = random.choice(words_offline_halfmeier)
+    else:
+
+        random_word = random.choice(words_offline)
 
     global letter_ls
     letter_ls = [] 
@@ -463,8 +472,13 @@ def pick_random_word():
     for letter in random_word:
         letter_ls.append(letter)
 
-    print("Das geheime Wort wurde vom Computer bestimmt!")
-    input("Enter drücken...")
+    if zz == 666:
+        print("Das geheime Maschinenbau-Wort wurde vom Computer bestimmt!")
+        input("Enter drücken...")
+
+    else:
+        print("Das geheime Wort wurde vom Computer bestimmt!")
+        input("Enter drücken...")
 
 def pick_random_word_online():
 
@@ -493,12 +507,17 @@ def game_hanman_computer_offline_online():
 
     global letter_ls
     global wrong_letters_ls
+    global zz
     answer = False  # Fix: Initialize answer to avoid UnboundLocalError
 
     zz = computer_hangman()
 
     big_text("hangman")
     diffi = difficulty()
+
+    if zz == 666:
+
+        pick_random_word()
 
     if zz == 1:
 
