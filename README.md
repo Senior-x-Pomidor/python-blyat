@@ -27,7 +27,7 @@ python3 games.py
 ## ⚙️ Win10 Output fix
 
 - By default, PowerShell (and the legacy Windows Console) does not interpret ANSI escape sequences (“VT100”).
-- Follow the steps below to manually enable color escape codes (`\033[…m`) on Windows 10/11.
+- Follow the steps below to manually enable color escape codes (`\033[…m`) on Windows 10.
 - Note: If you don’t perform this, the ANSI color-code sequences will not be interpreted and will instead be displayed as raw text.
 
 ### 1. Via the Registry (Manual)
